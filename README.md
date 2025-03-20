@@ -1,1 +1,1 @@
-# dbms_mini-project
+# stress detection website
