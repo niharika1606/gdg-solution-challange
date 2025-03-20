@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'uploads.apps.UploadsConfig',
     'user.apps.UserConfig',
     'crispy_forms',
     'crispy_bootstrap4',
@@ -75,23 +77,12 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}'''
-DATABASES = {
-    'default': {
-        'ENGINE':'django.db.backends.mysql',
-        'NAME':'user',
-        'USER':'root',
-        'PASSWORD':'root123',
-        'HOST':'localhost',
-        'PORT':'3306'
-    }
-    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -132,5 +123,11 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL ='/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'  # Or 'bootstrap5' or 'uni_form'
+LOGIN_REDIRECT_URL='store-home'
+LOGOUT_REDIRECT_URL = 'logout'
+LOGIN_URL='login'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
