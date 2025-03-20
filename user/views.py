@@ -8,9 +8,6 @@ from django.contrib.auth.decorators import login_required
 import uuid
 from django.contrib.auth.models import User
 def registeruser(request):
-    return render(request,'user/register.html')
-# Create your views here.
-def register(request):
     if request.method=='POST':
         form=UserRegistrationForm(request.POST)
         if form.is_valid():
