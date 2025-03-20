@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import essay
+from django.contrib.auth.decorators import login_required
 class PostListView(ListView):
     model = essay
     template_name = 'uploads/home.html' 
@@ -26,7 +27,16 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         messages.success(self.request, "Post created successfully!")
         return super().form_valid(form)
 def home(request):
+    # Always include both querysets in the context
     context = {
-        'post': essay.objects.all()
+        'post': essay.objects.all() if request.user.is_superuser else None,
+        'user_content': essay.objects.filter(student=request.user)
     }
+    
+    # Print the querysets to confirm they are being fetched correctly
+    print("Post:", context['post'])
+    print("User Content:", context['user_content'])
+
+    return render(request, 'uploads/home.html', context)
+
     return render(request, 'uploads/home.html', context)

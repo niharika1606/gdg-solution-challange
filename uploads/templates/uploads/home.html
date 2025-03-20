@@ -1,34 +1,42 @@
-{% extends "uploads\base.html"%}
-{%block content%}
-    <h1>Essays from students</h1>
-    {%for post0 in post%}
-    <h4>{{post0.student}}</h4>
-            <div class="media-body">
-              <div class="article-metadata">
-                <a class="mr-2" href="#">{{post0.title}}</a>
-                <small class="text-muted">{{post0.created_at}}</small>
-              </div>
-              <h2><a class="article-title" href="{% url 'post-detail' post0.id%}">{{post0.content}}</a></h2>
-              <p class="article-content">{{ post0.created_at|date:'F d, Y' }}</p>
+{% extends "uploads/base.html" %}
+{% block content %}
+<p>Debug Post: {{ post }}</p>
+<p>Debug User Content: {{ user_content }}</p>
+{% if user.is_superuser %}
+    <h1>Essays from Students</h1>
+    {% if post %}
+        {% for post0 in post %}
+        <div class="media-body">
+            <h4>{{ post0.student }}</h4>
+            <div class="article-metadata">
+                <a class="mr-2" href="#">{{ post0.title }}</a>
+                <small class="text-muted">{{ post0.created_at }}</small>
             </div>
-          </article>
-          
-    {% endfor %}
-    {% if is_paginated %}
-      {%if page_obj.has_previous %}
-      <a class= "btn btn-outline-info mb-4" href="?page=1"> First </a> 
-      <a class= "btn btn-outline-info mb-4" href="?page={{page_obj.previous_page_number}}"> Previous </a> 
-      {% endif %}
-      {% for num in page_obj.paginator.page_range %}
-        {% if page_obj.number == num %}
-        <a class= "btn btn-info mb-4" href="?page={{num}}"> {{num}} </a>
-        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} 
-        <a class= "btn btn-outline-info mb-4" href="?page={{num}}"> {{num}} </a>
-        {% endif %}
-      {% endfor %}
-      {%if page_obj.has_next %}
-      <a class= "btn btn-outline-info mb-4" href="?page={{page_obj.next_page_number}}"> Next </a> 
-      <a class= "btn btn-outline-info mb-4" href="?page={{page_obj.paginator.num_pages}}"> Last </a> 
-      {% endif %}
+            <h2>
+                <a class="article-title" href="{% url 'post-detail' post0.id %}">{{ post0.content }}</a>
+            </h2>
+            <p class="article-content">{{ post0.created_at|date:'F d, Y' }}</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No essays available.</p>
     {% endif %}
-    {%endblock content%}
+{% endif %}
+
+<!-- Display user's own content -->
+<h1>Your Uploaded Content</h1>
+{% if user_content %}
+    <ul>
+        {% for content in user_content %}
+        <li>
+            <h2>{{ content.title }}</h2>
+            <p>{{ content.content }}</p>
+            <small>Date: {{ content.created_at }}</small>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>You haven't uploaded any content yet.</p>
+{% endif %}
+
+{% endblock content %}
