@@ -9,7 +9,7 @@
                 <small class="text-muted">{{post0.created_at}}</small>
               </div>
               <h2><a class="article-title" href="{% url 'post-detail' post0.id%}">{{post0.content}}</a></h2>
-              <p class="article-content">{{post0.created_at|post0.created_at:'F d,Y'}}</p>
+              <p class="article-content">{{ post0.created_at|date:'F d, Y' }}</p>
             </div>
           </article>
           
