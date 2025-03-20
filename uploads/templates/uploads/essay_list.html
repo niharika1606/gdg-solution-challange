@@ -1,7 +1,17 @@
-<!-- essay_list.html -->
-{% extends "uploads\base.html" %}
-
+{% extends "uploads/base.html" %}
 {% block content %}
-    <h1>Essay List</h1>
-    <p>No essays found.</p>
-{% endblock %}
+<h1>Your Uploaded Essays</h1>
+{% if user_content %}
+    <ul>
+        {% for essay_item in user_content %}
+        <li>
+            <h2>{{ essay_item.title }}</h2>
+            <p>{{ essay_item.content }}</p>
+            <small>Uploaded on: {{ essay_item.created_at }}</small>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>You haven't uploaded any essays yet.</p>
+{% endif %}
+{% endblock content %}

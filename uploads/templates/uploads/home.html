@@ -1,7 +1,5 @@
 {% extends "uploads/base.html" %}
 {% block content %}
-<p>Debug Post: {{ post }}</p>
-<p>Debug User Content: {{ user_content }}</p>
 {% if user.is_superuser %}
     <h1>Essays from Students</h1>
     {% if post %}
@@ -22,21 +20,4 @@
         <p>No essays available.</p>
     {% endif %}
 {% endif %}
-
-<!-- Display user's own content -->
-<h1>Your Uploaded Content</h1>
-{% if user_content %}
-    <ul>
-        {% for content in user_content %}
-        <li>
-            <h2>{{ content.title }}</h2>
-            <p>{{ content.content }}</p>
-            <small>Date: {{ content.created_at }}</small>
-        </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>You haven't uploaded any content yet.</p>
-{% endif %}
-
 {% endblock content %}
