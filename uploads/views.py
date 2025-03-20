@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import essay
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 class PostListView(ListView):
     model = essay  
     template_name = 'uploads/home.html'  
@@ -32,7 +33,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     fields = ['title', 'content']
 
     def get_success_url(self):
-        return reverse('home')  
+          return reverse_lazy('home')    
 
     def form_valid(self, form):
         form.instance.student = self.request.user
