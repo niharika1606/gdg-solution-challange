@@ -1,0 +1,15 @@
+{% extends "uploads\base.html"%}
+{%block content%}
+         <article class="media content-section">
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="mr-2" href="#">{{object.student}}</a>
+                <small class="text-muted">{{object.content}}</small>
+                
+              </div>
+              <h2 class="article-title">{{object.title}}</h2>
+              <p class="article-content">{{object.created_at|date:'F d,Y'}}</p>
+            </div>
+          </article>
+          
+    {%endblock content%}
