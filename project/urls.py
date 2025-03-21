@@ -33,6 +33,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='login'),
     path('logout/',user_views.custom_logout,name='logout'),
     path('profile/',user_views.Profile,name='profile'),
-    path('',PostListView.as_view(),name='home-page'),
+    path('list/',PostListView.as_view(),name='list-page'),
+    path('',up_views.home,name='home-page'),
     path('post/<int:pk>/',PostDetailView.as_view(),name='post-detail'),
 ]

@@ -4,9 +4,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import essay
-from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
-class PostListView(ListView):
+class PostListView(LoginRequiredMixin,ListView):
     model = essay  
     template_name = 'uploads/home.html'  
     context_object_name = 'essays'  
@@ -33,3 +32,6 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 class PostDetailView(DetailView):
     model=essay
     template_name='uploads/post_detail.html'
+    
+def home(request):
+    return render(request, "uploads/firstpage.html")

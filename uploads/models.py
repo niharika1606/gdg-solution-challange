@@ -7,6 +7,6 @@ class essay(models.Model):
     title=models.CharField(max_length=255)
     content=models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    
+    results=models.TextField(default='pending')
     def __str__(self):
         return self.title

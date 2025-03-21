@@ -1,17 +1,20 @@
 {% extends "uploads/base.html" %}
 {% block content %}
-    <h1>Essays from Students</h1>
         {% for post0 in essays %}
         <div class="media-body">
-            <h4>{{ post0.student }}</h4>
+            <h2>{{ post0.student }}</h2>
+            <h1>Essays from Students</h1>
+
             <div class="article-metadata">
-                <a class="mr-2" href="#">{{ post0.title }}</a>
+               <h1> <a class="article-title" href="#">{{ post0.title }}</a></h1>
                 <small class="text-muted">{{ post0.created_at }}</small>
             </div>
-            <h2>
-                <a class="article-title" href="{% url 'post-detail' post0.id %}">{{ post0.content }}</a>
-            </h2>
+            <h4>
+                <a class="mr-2" href="{% url 'post-detail' post0.id %}">{{ post0.content }}</a>
+            </h4>
             <p class="article-content">{{ post0.created_at|date:'F d, Y' }}</p>
+            <p class="article-content">{{ post0.results}}</p>
+
         </div>
         {% endfor %}
 
