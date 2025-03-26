@@ -1,38 +1,59 @@
-{% extends "uploads/base.html" %}
-{% block content %}
-        {% for post0 in essays %}
-        <div class="media-body">
-            <h2>{{ post0.student }}</h2>
-            <h1>Essays from Students</h1>
+<!DOCTYPE html>
+{% load static %}
 
-            <div class="article-metadata">
-               <h1> <a class="article-title" href="#">{{ post0.title }}</a></h1>
-                <small class="text-muted">{{ post0.created_at }}</small>
-            </div>
-            <h4>
-                <a class="mr-2" href="{% url 'post-detail' post0.id %}">{{ post0.content }}</a>
-            </h4>
-            <p class="article-content">{{ post0.created_at|date:'F d, Y' }}</p>
-            <p class="article-content">{{ post0.results}}</p>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Scereno</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'uploads/css/output.css' %}"></head>
+
+<body
+    class="min-h-screen w-full bg-cover bg-center bg-no-repeat"
+    style="background-image: url('{% static 'uploads/images/bg2.jpg' %}');"
+>
+    <nav class="p-2 m-2 flex justify-between relative z-3">
+        <div id="logo" class="text-2xl ml-10">
+            <img src="{% static 'uploads/images/logo.jpg' %}" alt="logo" class="w-25 h-15">
+        </div>
+        <div id="navi-items" class="flex m-2 justify-around w-200">
+          <button class="p-2 text-gray-700 hover:bg-black hover:text-white hover:rounded-xl" onclick="window.location.href='{% url 'about' %}'">About</button>
+          <button class="p-2 text-gray-700 hover:bg-black hover:text-white hover:rounded-xl" onclick="window.location.href='{% url 'profile' %}'">Profile</button>
+          <button class="p-2 text-gray-700 hover:bg-black hover:text-white hover:rounded-xl"  onclick="window.location.href='{% url 'list-page' %}'">History</button>
+          <button class="p-2 text-gray-700 hover:bg-black hover:text-white hover:rounded-xl" onclick="window.location.href='{% url 'post-create' %}'">New post</button>
+        </div>
+    </nav>
+
+    <div id="main" class="flex">
+      <div id="headline" class="w-150 p-8 translate-y-15 translate-x-10">
+        <h1 class="text-6xl font-bold">Unlock Your<br />Potential:</h1>
+        <p class="text-3xl pt-4 pb-4">Discover proven techniques to manage student stress and enhance academic performance</p>
+
+        <div id="buttons" class="mt-4 pt-4">
+          {% if user.is_authenticated %}
+      <button 
+          class="px-4 py-1 m-4 text-xl rounded-xl text-white bg-black hover:bg-white border hover:text-black hover:cursor-pointer"
+          onclick="window.location.href='{% url 'logout' %}'"
+      >
+          Logout
+      </button>
+      {% else %}
+          <button 
+          class="px-4 py-1 m-4 text-xl rounded-xl text-white bg-black hover:bg-white border hover:text-black hover:cursor-pointer"
+          onclick="window.location.href='{% url 'login' %}'"
+      >
+          Login
+      </button>
+      
+
+      <button 
+      class="px-4 py-1 m-4 text-xl rounded-xl text-white bg-black hover:bg-white border hover:text-black hover:cursor-pointer"
+      onclick="window.location.href='{% url 'register' %}'"
+  >Register</button>
+  {% endif %}
 
         </div>
-        {% endfor %}
-
-        {% if is_paginated %}
-        {%if page_obj.has_previous %}
-        <a class= "btn btn-outline-info mb-4" href="?page=1"> First </a> 
-        <a class= "btn btn-outline-info mb-4" href="?page={{page_obj.previous_page_number}}"> Previous </a> 
-        {% endif %}
-        {% for num in page_obj.paginator.page_range %}
-          {% if page_obj.number == num %}
-          <a class= "btn btn-info mb-4" href="?page={{num}}"> {{num}} </a>
-          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} 
-          <a class= "btn btn-outline-info mb-4" href="?page={{num}}"> {{num}} </a>
-          {% endif %}
-        {% endfor %}
-        {%if page_obj.has_next %}
-        <a class= "btn btn-outline-info mb-4" href="?page={{page_obj.next_page_number}}"> Next </a> 
-        <a class= "btn btn-outline-info mb-4" href="?page={{page_obj.paginator.num_pages}}"> Last </a> 
-        {% endif %}
-      {% endif %}
-{% endblock content %}
+      </div>
+    </div>
+</body>
+</html>

@@ -25,6 +25,8 @@ from uploads.views import (
 from user import views as user_views
 from uploads import views as up_views
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls), 
@@ -35,5 +37,11 @@ urlpatterns = [
     path('profile/',user_views.Profile,name='profile'),
     path('list/',PostListView.as_view(),name='list-page'),
     path('',up_views.home,name='home-page'),
+    path('about/',up_views.about,name='about'),
+
     path('post/<int:pk>/',PostDetailView.as_view(),name='post-detail'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

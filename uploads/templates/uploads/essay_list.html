@@ -1,17 +1,57 @@
 {% extends "uploads/base.html" %}
 {% block content %}
-<h1>Your Uploaded Essays</h1>
-{% if user_content %}
-    <ul>
-        {% for essay_item in user_content %}
-        <li>
-            <h2>{{ essay_item.title }}</h2>
-            <p>{{ essay_item.content }}</p>
-            <small>Uploaded on: {{ essay_item.created_at }}</small>
-        </li>
-        {% endfor %}
-    </ul>
-{% else %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List</title>
+  <link rel="stylesheet" href="output.css">
+</head>
+<body class="bg-gray-100">
+  <!-- Navigation -->
+  <nav class="pt-1 pb-1 m-1 bg-gray-900 flex justify-between items-center">
+    <div id="nav-cont" class="pl-4 md:pl-40">
+      <p class="pt-6 capitalize text-white text-2xl md:text-3xl text-left">achieve your academic dreams</p>
+      <p class="pb-6 pt-2 px-2 capitalize text-white text-sm md:text-base">unlock your Potential</p>
+    </div>
+    
+    <button class="px-3 py-1 m-4 h-10 w-20 rounded-xl text-white border hover:bg-gray-700 transition duration-300" onclick="window.location.href='{% url 'home-page' %}'">Home</button>
+    
+    <button class="px-3 py-1 m-4 h-10 w-20 rounded-xl text-white border hover:bg-gray-700 transition duration-300" onclick="window.location.href='{% url 'profile' %}'">Profile</button>
+    
+    <button class="px-3 py-1 m-4 h-20 w-20 rounded-xl text-white border hover:bg-gray-700 transition duration-300" onclick="window.location.href='{% url 'post-create' %}'">New Post</button>
+  </nav>
+
+  <!-- Content -->
+  <div id="content" class="p-4">
+    <div id="top-cont" class="text-center">
+      <p class="text-3xl md:text-4xl p-4">Empower Your Academic Journey</p>
+      <p class="p-2 text-lg md:text-xl text-gray-700">
+        Discover the secret to academic success: Our comprehensive stress management platform. Unlock <br class="hidden md:block"> personalized strategies, expert support, and a thriving community to help you overcome challenges
+      </p>
+    </div>
+
+    <!-- Grid Content -->
+    {% if essays %}
+    <div id="grid-content" class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" {% if essay_item.pk %}
+    onclick="window.location.href='{% url 'post-detail' essay_item.pk %}'"
+    {% endif %}
+    >
+        {% for essay_item in essays %}
+                <div class="p-6 border bg-white rounded-lg shadow-md hover:shadow-lg hover:bg-gray-50 transition duration-300 transform hover:scale-105"> <h2>{{ essay_item.title }}</h2>
+            <li>
+        <p>{{ essay_item.content }}</p>
+        <small>Uploaded on: {{ essay_item.created_at }}</small>
+            </li>
+    </div>
+    {% endfor %}
+    {% else %}
     <p>You haven't uploaded any essays yet.</p>
 {% endif %}
+        </div>
+  </div>
+</body>
+</html>
 {% endblock content %}

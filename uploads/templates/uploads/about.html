@@ -1,0 +1,251 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Website</title>
+    <link href="{% static '/output.css' %}" rel="stylesheet" />
+    <style>
+      /* Custom styles for the team member hover effect */
+      .teamMember:hover .teamMemberDetails {
+        opacity: 1;
+        transform: translateY(0);
+         transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+      }
+    </style>
+  </head>
+  <body class="bg-white font-inter">
+    <!-- Container -->
+    <div class="min-h-screen flex flex-col">
+      <!-- Navbar -->
+      <nav class="p-2 m-2 flex justify-between relative z-3">
+        <div id="logo" class="text-2xl ml-10">
+            <img src="{% static 'uploads/images/logo.jpg' %}" alt="logo" class="w-25 h-15">
+        </div>
+        <div id="navi-items" class="flex m-2 justify-around w-200">
+          <button class="p-2 text-gray-700 hover:bg-black hover:text-white hover:rounded-xl" onclick="window.location.href='{% url 'home-page' %}'">Home</button>
+          {% if user.is_authenticated %}
+          <button class="p-2 text-gray-700 hover:bg-black hover:text-white hover:rounded-xl" onclick="window.location.href='{% url 'profile' %}'">Profile</button>
+          <button class="p-2 text-gray-700 hover:bg-black hover:text-white hover:rounded-xl"  onclick="window.location.href='{% url 'list-page' %}'">History</button>
+          <button class="p-2 text-gray-700 hover:bg-black hover:text-white hover:rounded-xl" onclick="window.location.href='{% url 'post-create' %}'">New post</button>
+          {% endif %}
+        </div>
+    </nav>
+      <!-- About Section -->
+      <section class="py-8 px-4 text-center bg-black text-white">
+        <h1 class="text-5xl font-bold mb-8">About Us</h1>
+        <p class="text-xl max-w-2xl mx-auto leading-relaxed">
+          We are a passionate team dedicated to creating amazing experiences.
+          Our mission is to innovate and inspire through our work.
+        </p>
+      </section>
+
+      <!-- Team Section -->
+      <section class="py-16 px-4 text-center">
+        <h2 class="text-4xl font-semibold mb-8">Our Team</h2>
+        <div class="flex justify-center gap-8 flex-wrap">
+          <!-- Team Member 1 -->
+          <div
+            class="teamMember w-48 h-32 p-2 bg-gray-700 bg-opacity-30 rounded-lg backdrop-blur-sm border-b-2 border-l-2 border-white border-opacity-40 shadow-[-40px_50px_30px_rgba(0,0,0,0.28)] skew-x-12 transition-all duration-400 overflow-hidden relative hover:h-64 hover:skew-x-0"
+          >
+            <div class="p-4 flex gap-2">
+              <div
+                class="w-2.5 h-2.5 bg-gray-400 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"
+              ></div>
+              <div
+                class="w-2.5 h-2.5 bg-gray-500 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"
+              ></div>
+              <div
+                class="w-2.5 h-2.5 bg-gray-600 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"
+              ></div>
+            </div>
+            <h3 class="text-center mt-3 text-white">Sushant Bhanwase</h3>
+            <div
+              class="teamMemberDetails opacity-0 translate-y-5 transition-all duration-300 z-10"
+            >
+              <p class="text-lg text-white mt-2">ML Expert</p>
+              <div class="flex flex-col gap-2 mt-2">
+                <a
+                  href="mailto:sushantbhanwse@gmail.com"
+                  target="_blank"
+                  class="text-indigo-400 hover:text-indigo-300 hover:underline"
+                  >Email</a
+                >
+                <a
+                  href="https://www.linkedin.com/in/sushant-bhanwase/"
+                  target="_blank"
+                  class="text-indigo-400 hover:text-indigo-300 hover:underline"
+                  >LinkedIn</a
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="teamMember w-48 h-32 p-2 bg-gray-700 bg-opacity-30 rounded-lg backdrop-blur-sm border-b-2 border-l-2 border-white border-opacity-40 shadow-[-40px_50px_30px_rgba(0,0,0,0.28)] skew-x-12 transition-all duration-400 overflow-hidden relative hover:h-64 hover:skew-x-0"
+          >
+            <div class="p-4 flex gap-2">
+              <div
+                class="w-2.5 h-2.5 bg-gray-400 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"
+              ></div>
+              <div
+                class="w-2.5 h-2.5 bg-gray-500 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"
+              ></div>
+              <div
+                class="w-2.5 h-2.5 bg-gray-600 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"
+              ></div>
+            </div>
+            <h3 class="text-center mt-3 text-white">Aditya Dudhagi</h3>
+            <div
+              class="teamMemberDetails opacity-0 translate-y-5 transition-all duration-300 z-10"
+            >
+              <p class="text-lg text-white mt-2">Frontend Developer</p>
+              <div class="flex flex-col gap-2 mt-2">
+                <a
+                  href="mailto:adityadudhagi28@gmail.com"
+                  target="_blank"
+                  class="text-indigo-400 hover:text-indigo-300 hover:underline"
+                  >Email</a
+                >
+                <a
+                  href="http://www.linkedin.com/in/aditya-dudhagi"
+                  target="_blank"
+                  class="text-indigo-400 hover:text-indigo-300 hover:underline"
+                  >LinkedIn</a
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="teamMember w-48 h-32 p-2 bg-gray-700 bg-opacity-30 rounded-lg backdrop-blur-sm border-b-2 border-l-2 border-white border-opacity-40 shadow-[-40px_50px_30px_rgba(0,0,0,0.28)] skew-x-12 transition-all duration-400 overflow-hidden relative hover:h-64 hover:skew-x-0"
+          >
+            <div class="p-4 flex gap-2">
+              <div
+                class="w-2.5 h-2.5 bg-gray-400 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"
+              ></div>
+              <div
+                class="w-2.5 h-2.5 bg-gray-500 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"
+              ></div>
+              <div
+                class="w-2.5 h-2.5 bg-gray-600 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"
+              ></div>
+            </div>
+            <h3 class="text-center mt-3 text-white">Niharika Mangalpalli</h3>
+            <div
+              class="teamMemberDetails opacity-0 translate-y-5 transition-all duration-300 z-10"
+            >
+              <p class="text-lg text-white mt-2">Backend Developer</p>
+              <div class="flex flex-col gap-2 mt-2">
+                <a
+                  href="mailto:mangalpalliniharika@gmail.com"
+                  target="_blank"
+                  class="text-indigo-400 hover:text-indigo-300 hover:underline"
+                  >Email</a
+                >
+                <a
+                  href="https://www.linkedin.com/in/niharika-mangalpalli-630444355/"
+                  target="_blank"
+                  class="text-indigo-400 hover:text-indigo-300 hover:underline"
+                  >LinkedIn</a
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="teamMember w-48 h-32 p-2 bg-gray-700 bg-opacity-30 rounded-lg backdrop-blur-sm border-b-2 border-l-2 border-white border-opacity-40 shadow-[-40px_50px_30px_rgba(0,0,0,0.28)] skew-x-12 transition-all duration-400 overflow-hidden relative hover:h-64 hover:skew-x-0"
+          >
+            <div class="p-4 flex gap-2">
+              <div
+                class="w-2.5 h-2.5 bg-gray-400 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"
+              ></div>
+              <div
+                class="w-2.5 h-2.5 bg-gray-500 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"
+              ></div>
+              <div
+                class="w-2.5 h-2.5 bg-gray-600 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"
+              ></div>
+            </div>
+            <h3 class="text-center mt-3 text-white">Srushti Madhekar</h3>
+            <div
+              class="teamMemberDetails opacity-0 translate-y-5 transition-all duration-300 z-10"
+            >
+              <p class="text-lg text-white mt-2">Lead Designer</p>
+              <div class="flex flex-col gap-2 mt-2">
+                <a
+                  href="mailto:srushtimadhekar0712@gmail.com"
+                  target="_blank"
+                  class="text-indigo-400 hover:text-indigo-300 hover:underline"
+                  >Email</a
+                >
+                <a
+                  href="https://www.linkedin.com/in/srushti-madhekar/"
+                  target="_blank"
+                  class="text-indigo-400 hover:text-indigo-300 hover:underline"
+                  >LinkedIn</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Team Member 2 -->
+          <!-- <div class="teamMember w-48 h-32 p-2 bg-gray-700 bg-opacity-30 rounded-lg backdrop-blur-sm border-b-2 border-l-2 border-white border-opacity-40 shadow-[-40px_50px_30px_rgba(0,0,0,0.28)] skew-x-12 transition-all duration-400 overflow-hidden relative hover:h-64 hover:skew-x-0">
+            <div class="p-4 flex gap-2">
+                <div class="w-2.5 h-2.5 bg-gray-400 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"></div>
+                <div class="w-2.5 h-2.5 bg-gray-500 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"></div>
+                <div class="w-2.5 h-2.5 bg-gray-600 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"></div>
+            </div>
+            <h3 class="text-center mt-5 text-white">Aditya Dudhagi</h3>
+            <div class="teamMemberDetails opacity-0 translate-y-5 transition-all duration-300">
+                <p class="text-lg text-white mt-2">Frontend Developer</p>
+                <div class="flex flex-col gap-2 mt-2">
+                    <a href="mailto:adityadudhagi28@gmail.com" target="_blank" class="text-indigo-600 hover:text-indigo-700 hover:underline">Email</a>
+                    <a href="http://www.linkedin.com/in/aditya-dudhagi" target="_blank" class="text-indigo-600 hover:text-indigo-700 hover:underline">LinkedIn</a>
+                </div>
+            </div>
+        </div> -->
+
+          <!-- Team Member 3 -->
+          <!-- <div class="teamMember w-48 h-32 p-2 bg-gray-700 bg-opacity-30 rounded-lg backdrop-blur-sm border-b-2 border-l-2 border-white border-opacity-40 shadow-[-40px_50px_30px_rgba(0,0,0,0.28)] skew-x-12 transition-all duration-400 overflow-hidden relative hover:h-64 hover:skew-x-0">
+            <div class="p-4 flex gap-2">
+                <div class="w-2.5 h-2.5 bg-gray-400 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"></div>
+                <div class="w-2.5 h-2.5 bg-gray-500 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"></div>
+                <div class="w-2.5 h-2.5 bg-gray-600 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"></div>
+            </div>
+            <h3 class="text-center mt-5 text-white">Niharika Mangalpalli</h3>
+            <div class="teamMemberDetails opacity-0 translate-y-5 transition-all duration-300">
+                <p class="text-lg text-white mt-2">BackEnd Developer</p>
+                <div class="flex flex-col gap-2 mt-2">
+                    
+                </div>
+            </div>
+        </div> -->
+
+          <!-- Team Member 4 -->
+          <!-- <div class="teamMember w-48 h-32 p-2 bg-gray-700 bg-opacity-30 rounded-lg backdrop-blur-sm border-b-2 border-l-2 border-white border-opacity-40 shadow-[-40px_50px_30px_rgba(0,0,0,0.28)] skew-x-12 transition-all duration-400 overflow-hidden relative hover:h-64 hover:skew-x-0">
+            <div class="p-4 flex gap-2">
+                <div class="w-2.5 h-2.5 bg-gray-400 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"></div>
+                <div class="w-2.5 h-2.5 bg-gray-500 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"></div>
+                <div class="w-2.5 h-2.5 bg-gray-600 rounded-full shadow-[-5px_5px_5px_rgba(0,0,0,0.28)]"></div>
+            </div>
+            <h3 class="text-center mt-5 text-white">Srushti Madhekar</h3>
+            <div class="teamMemberDetails opacity-0 translate-y-5 transition-all duration-300">
+                <p class="text-lg text-white mt-2">Lead Designer</p>
+                <div class="flex flex-col gap-2 mt-2">
+                    
+                </div>
+            </div>
+        </div> -->
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="py-8  bg-gray-900 text-center">
+        <p class="text-gray-400">&copy; 2025 Scereno. All rights reserved.</p>
+      </footer>
+    </div>
+  </body>
+</html>
+{% endblock content %}
