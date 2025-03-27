@@ -1,5 +1,6 @@
 {% extends "uploads/base.html" %}
 {% block content %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +8,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>List</title>
-  <link rel="stylesheet" href="output.css">
+  <link href="{% static 'css/output.css' %}" rel="stylesheet" />
 </head>
 <body class="bg-gray-100">
   <!-- Navigation -->
@@ -36,13 +37,14 @@
     <!-- Grid Content -->
     {% if essays %}
     <div id="grid-content" class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" {% if essay_item.pk %}
-    onclick="window.location.href='{% url 'post-detail' essay_item.pk %}'"
     {% endif %}
     >
         {% for essay_item in essays %}
-                <div class="p-6 border bg-white rounded-lg shadow-md hover:shadow-lg hover:bg-gray-50 transition duration-300 transform hover:scale-105"> <h2>{{ essay_item.title }}</h2>
+                <div class="p-6 border bg-white rounded-lg shadow-md hover:shadow-lg hover:bg-gray-50 transition duration-300 transform hover:scale-105"> <a  href="{% url 'post-detail' essay_item.id%}">{{ essay_item.title }}</a>
             <li>
         <p>{{ essay_item.content }}</p>
+        <p>{{ essay_item.student}}</p>
+
         <small>Uploaded on: {{ essay_item.created_at }}</small>
             </li>
     </div>

@@ -5,12 +5,12 @@ from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import essay
 from django.urls import reverse_lazy
+from gemini.views import GenerateResponse
 class PostListView(LoginRequiredMixin,ListView):
     model = essay  
     template_name = 'uploads/essay_list.html'  
     context_object_name = 'essays'  
     ordering = ['-created_at']  
-    paginate_by = 5
     def get_queryset(self):
         if self.request.user.is_superuser:
             return essay.objects.all()
@@ -22,16 +22,43 @@ class PostDetailView(DetailView):
     template_name = 'uploads/post_detail.html'
 
 class PostCreateView(LoginRequiredMixin, CreateView):
-    model = essay 
+    """
+    View to create a new essay and automatically run the ML model.
+    """
+    model = essay
     template_name = 'uploads/post_form.html'
-    fields = ['title', 'content']
+    fields = ['title', 'content']  # Fields in the form
 
     def form_valid(self, form):
+        """
+        Run ML model on the content after saving the essay.
+        """
+        # Associate the essay with the current user
         form.instance.student = self.request.user  
-        messages.success(self.request, "Post created successfully!")
-        return super().form_valid(form)
+        
+        # Save the form (create the essay object)
+        response = super().form_valid(form)
+        
+        # Run the ML model and save the results
+        try:
+            result = GenerateResponse(form.instance.content)
+            form.instance.results = result  # Save ML result in the essay
+            form.instance.save()
 
-  
+            messages.success(self.request, "Post created successfully with ML results!")
+
+        except Exception as e:
+            form.instance.results = f"Error: {str(e)}"
+            form.instance.save()
+            messages.error(self.request, f"Error generating ML result: {str(e)}")
+
+        return response
+
+    def get_success_url(self):
+        """
+        Redirect after successful form submission.
+        """
+        return reverse_lazy('essay_list') 
     def get_success_url(self):
         return reverse_lazy('home-page') 
 

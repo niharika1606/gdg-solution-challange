@@ -39,7 +39,6 @@ urlpatterns = [
     path('list/',PostListView.as_view(),name='list-page'),
     path('',up_views.home,name='home-page'),
     path('about/',up_views.about,name='about'),
-     path('chat/', GeminiChatView.as_view(), name='gemini_chat'),
     path('post/<int:pk>/',PostDetailView.as_view(),name='post-detail'),
 ]
 
