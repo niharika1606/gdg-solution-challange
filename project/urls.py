@@ -27,6 +27,7 @@ from uploads import views as up_views
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from django.conf import settings
+from gemini.views import GeminiChatView
 
 urlpatterns = [
     path('admin/', admin.site.urls), 
@@ -38,7 +39,7 @@ urlpatterns = [
     path('list/',PostListView.as_view(),name='list-page'),
     path('',up_views.home,name='home-page'),
     path('about/',up_views.about,name='about'),
-
+     path('chat/', GeminiChatView.as_view(), name='gemini_chat'),
     path('post/<int:pk>/',PostDetailView.as_view(),name='post-detail'),
 ]
 

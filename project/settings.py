@@ -1,5 +1,7 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,6 +23,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'tailwind',                     # TailwindCSS for styling
+    'gemini.apps.GeminiConfig',
     'uploads.apps.UploadsConfig',   # App-level config
     'user.apps.UserConfig',         # User management app
     'crispy_forms',                  # Crispy forms
@@ -155,8 +158,9 @@ STATICFILES_FINDERS = [
 
 # Authentication redirects
 LOGIN_REDIRECT_URL = 'home-page'
-LOGOUT_REDIRECT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'home-page'
 LOGIN_URL = 'login'
+GOOGLE_CLOUD_API_KEY = os.getenv('GOOGLE_CLOUD_API_KEY')
 
 # Auto field settings
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
