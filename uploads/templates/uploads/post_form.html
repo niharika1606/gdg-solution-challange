@@ -1,47 +1,142 @@
 {% extends "uploads/base.html" %}
-{%load crispy_forms_tags%}
-{%block content%} 
+{% load crispy_forms_tags %}
+{% block content %}
 
-<html lang="en">
+<style>
+    body {
+        background: linear-gradient(to bottom, #1a1a1a, #222);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        color: #e0e0e0;
+    }
 
-<body class="bg-gray-50 font-inter">
-  <div class="h-screen grid lg:grid-cols-2">
-    <!-- Left Side - Form -->
-    <div class="flex flex-col justify-center items-center p-6 sm:p-12">
-      <div class="w-full max-w-md space-y-8">
-        <!-- Logo & Welcome Text -->
-        <div class="text-center mb-8">
-          <div class="flex flex-col items-center gap-2">
-            <!-- <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center hover:bg-blue-200 transition-all">
-              <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-              </svg>
-            </div> -->
-            <h1 class="text-2xl font-bold mt-2">Upload an Essay</h1>
-            <p class="text-gray-500">Fill the form to upload your essay</p>
-          </div>
-        </div>
-   <div class="content-section"> 
-   <div class="content-section"> 
-            <!-- Do not modify -->
+    .form-container {
+        width: 400px;
+        background: linear-gradient(#212121, #212121) padding-box,
+            linear-gradient(145deg, transparent 35%, #e81cff, #40c9ff) border-box;
+        border: 2px solid transparent;
+        padding: 32px 24px;
+        font-size: 14px;
+        color: #e0e0e0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        box-sizing: border-box;
+        border-radius: 16px;
+        background-size: 200% 100%;
+        animation: gradient 5s ease infinite;
+        max-width: 90%;
+    }
 
-    <form method="POST">
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .form-container button:active {
+        scale: 0.95;
+    }
+
+    .form-container .form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form-container .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .form-container .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #00FFFF;
+        font-weight: 600;
+        font-size: 12px;
+    }
+
+    .form-container .form-group input,
+    .form-container .form-group textarea {
+        width: calc(100% - 32px);
+        padding: 12px 16px;
+        border-radius: 8px;
+        color: #e0e0e0;
+        font-family: inherit;
+        background-color: transparent;
+        border: 1px solid #34495e;
+        box-sizing: border-box;
+    }
+
+    .form-container .form-group textarea {
+        resize: vertical;
+        height: 150px;
+    }
+
+    .form-container .form-group input::placeholder,
+    .form-container .form-group textarea::placeholder {
+        opacity: 0.5;
+    }
+
+    .form-container .form-group input:focus,
+    .form-container .form-group textarea:focus {
+        outline: none;
+        border-color: #00FFFF;
+    }
+
+    .form-container .form-submit-btn {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        align-self: flex-start;
+        font-family: inherit;
+        color: #1f293a;
+        font-weight: 600;
+        width: 40%;
+        background: #00FFFF;
+        border: 1px solid #00FFFF;
+        padding: 12px 16px;
+        font-size: inherit;
+        gap: 8px;
+        margin-top: 8px;
+        cursor: pointer;
+        border-radius: 6px;
+    }
+
+    .form-container .form-submit-btn:hover {
+        background-color: #fff;
+        border-color: #fff;
+        color: #1f293a;
+    }
+</style>
+
+<div class="form-container">
+    <form class="form" method="POST">
         {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Add the title and content in the forms to get the analysis</legend>
-            {{ form|crispy }}
-        </fieldset>
         <div class="form-group">
-            <button class= "btn btn-outline-info" type="submit">Upload</button>
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" required>
         </div>
+        <div class="form-group">
+            <label for="content">Content</label>
+            <textarea name="content" id="content" required></textarea>
+        </div>
+        <button type="submit" class="form-submit-btn">Upload</button>
     </form>
-            <!-- till here -->
+</div>
 
-    </div>
-    <div class="hidden lg:flex items-center justify-center bg-gray-900 text-white p-12">
-        <div class="max-w-md text-center">
-          <h2 class="text-3xl font-bold mb-4">Welcome back!</h2>
-          <p class="text-lg">Sign in to continue your conversations and catch up with your messages.</p>
-        </div>
-    </div>
-{% endblock content%}
+{% endblock content %}

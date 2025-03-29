@@ -148,6 +148,11 @@ TEMPLATES = [
         },
     },
 ]
+CRISPY_CLASS_CONVERTERS = {
+    'textinput': "input-box",
+    'emailinput': "input-box",
+    'passwordinput': "input-box"
+}
 
 # Static file finders
 STATICFILES_FINDERS = [

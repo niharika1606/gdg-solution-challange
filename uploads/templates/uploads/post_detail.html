@@ -1,16 +1,96 @@
-{% extends "uploads\base.html"%}
-{%block content%}
-         <article class="media content-section">
-            <div class="media-body">
-              <div class="article-metadata">
-                <a class="mr-2" href="#">{{object.student}}</a>
-                <small class="text-muted">{{object.content}}</small>
-                
-              </div>
-              <h2 class="article-title">{{object.title}}</h2>
-              <p class="article-content">{{object.created_at|date:'F d,Y'}}</p>
-              <p>{{ object.results}}</p>
+{% extends "uploads/base.html" %}
+{% load static %}
+{% block content %}
 
+<style>
+    body {
+        background: linear-gradient(to bottom, #1a1a1a, #222);
+        color: #e0e0e0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+        padding: 2rem;
+        box-sizing: border-box;
+    }
+
+    .content-container {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content-section {
+        background-color: #212121;
+        border: 1px solid #34495e;
+        border-radius: 8px;
+        padding: 2rem;
+        max-width: 800px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .article-metadata {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .article-metadata a {
+        color: #00FFFF;
+        text-decoration: none;
+    }
+
+    .article-metadata small {
+        color: #ddd;
+        white-space: pre-line; /* Preserve line breaks */
+    }
+
+    .article-title {
+        color: #00FFFF;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .article-content {
+        color: #ddd;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .content-section p {
+        color: #e0e0e0;
+        line-height: 1.7;
+        text-align: justify;
+        white-space: pre-line; /* Preserve line breaks */
+    }
+
+    .content-section hr {
+        border: none;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #34495e, transparent);
+        margin: 2rem 0;
+    }
+</style>
+
+<div class="content-container">
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                <a href="#">{{ object.student }}</a>
+                <small>{{ object.content }}</small>
             </div>
-          </article>     
-    {%endblock content%}
+            <h2 class="article-title">{{ object.title }}</h2>
+            <p class="article-content">{{ object.created_at|date:'F d, Y' }}</p>
+            <hr>
+            <p>{{ object.results }}</p>
+        </div>
+    </article>
+</div>
+
+{% endblock content %}

@@ -7,6 +7,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 import uuid
 from django.contrib.auth.models import User
+from .models import Profile 
 def registeruser(request):
     if request.method=='POST':
         form=UserRegistrationForm(request.POST)
@@ -28,5 +29,12 @@ def custom_logout(request):
     return render(request, 'user/logout.html') 
 
 @login_required
-def Profile(request):
-        return render(request,'user/profile.html')
+def profile_view(request):
+    # Retrieve the current user's profile
+    profile = Profile.objects.get(user=request.user)
+    
+    # Pass the profile to the template
+    context = {
+        'profile': profile
+    }
+    return render(request, 'user/profile.html', context)
