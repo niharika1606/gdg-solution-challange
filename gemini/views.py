@@ -4,10 +4,13 @@ from django.shortcuts import render, redirect, reverse
 from uploads.models import essay
 import google.generativeai as genai
 import os
+from django.conf import settings
 from user.models import Profile
 from django.http import JsonResponse
 from django.db import transaction
-genai.configure(api_key=os.getenv('GOOGLE_CLOUD_API_KEY'))
+GOOGLE_CLOUD_API_KEY = os.getenv("GOOGLE_CLOUD_API_KEY")
+
+genai.configure(api_key=GOOGLE_CLOUD_API_KEY)
 generation_config = {
   "temperature": 1,
   "top_p": 0.95,
