@@ -28,6 +28,7 @@ from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from django.conf import settings
 from gemini.views import GeminiChatView
+from gemini import views as gem_view
 
 urlpatterns = [
     path('admin/', admin.site.urls), 
@@ -35,7 +36,7 @@ urlpatterns = [
     path('new/',PostCreateView.as_view(),name='post-create'),
     path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='login'),
     path('logout/',user_views.custom_logout,name='logout'),
-    path('profile/',user_views.Profile,name='profile'),
+    path('profile/',user_views.profile_view,name='profile'),
     path('list/',PostListView.as_view(),name='list-page'),
     path('',up_views.home,name='home-page'),
     path('about/',up_views.about,name='about'),

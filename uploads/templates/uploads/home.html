@@ -1,67 +1,138 @@
-<!DOCTYPE html>
+{% extends "uploads/base.html" %}
 {% load static %}
+{% block content %}
 
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to Scereno</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'uploads/css/output.css' %}"></head>
+<style>
+    body {
+        background: linear-gradient(to bottom, #1a1a1a, #222);
+        color: #e0e0e0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
 
-<body
-    class="min-h-screen w-full bg-cover bg-center bg-no-repeat"
-    style="background-image: url('{% static 'uploads/images/bg2.jpg' %}');"
->
-<!--Messages-->
-{%if messages%}
-  {%for message in messages%}
-  <div class="alert alert-{{message.tags}}">{{message}}</div>
-  {%endfor%}
-  {%endif%}
-  <!-- completed--> 
-   
-    <nav class="p-2 m-2 flex justify-between relative z-3">
-        <div id="logo" class="text-2xl ml-10">
-          <img src="{% static 'images/logo.jpg' %}" alt="logo" class="w-25 h-15">
-        </div>
-        <div id="navi-items" class="flex m-2 justify-around w-200">
-          <button class="p-2 text-gray-700 hover:bg-black hover:text-white hover:rounded-xl" onclick="window.location.href='{% url 'about' %}'">About</button>
-          <button class="p-2 text-gray-700 hover:bg-black hover:text-white hover:rounded-xl" onclick="window.location.href='{% url 'profile' %}'">Profile</button>
-          <button class="p-2 text-gray-700 hover:bg-black hover:text-white hover:rounded-xl"  onclick="window.location.href='{% url 'list-page' %}'">History</button>
-          <button class="p-2 text-gray-700 hover:bg-black hover:text-white hover:rounded-xl" onclick="window.location.href='{% url 'post-create' %}'">New post</button>
-        </div>
-    </nav>
+    .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 8rem 2rem;
+        background: linear-gradient(135deg, #2c3e50, #34495e);
+    }
 
-    <div id="main" class="flex">
-      <div id="headline" class="w-150 p-8 translate-y-15 translate-x-10">
-        <h1 class="text-6xl font-bold">Unlock Your<br />Potential:</h1>
-        <p class="text-3xl pt-4 pb-4">Discover proven techniques to manage student stress and enhance academic performance</p>
+    .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #00FFFF;
+    }
 
-        <div id="buttons" class="mt-4 pt-4">
-          {% if user.is_authenticated %}
-      <button 
-          class="px-4 py-1 m-4 text-xl rounded-xl text-white bg-black hover:bg-white border hover:text-black hover:cursor-pointer"
-          onclick="window.location.href='{% url 'logout' %}'"
-      >
-          Logout
-      </button>
-      {% else %}
-          <button 
-          class="px-4 py-1 m-4 text-xl rounded-xl text-white bg-black hover:bg-white border hover:text-black hover:cursor-pointer"
-          onclick="window.location.href='{% url 'login' %}'"
-      >
-          Login
-      </button>
-      
+    .hero p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        line-height: 1.8;
+    }
 
-      <button 
-      class="px-4 py-1 m-4 text-xl rounded-xl text-white bg-black hover:bg-white border hover:text-black hover:cursor-pointer"
-      onclick="window.location.href='{% url 'register' %}'"
-  >Register</button>
-  {% endif %}
+    .hero .button-container {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
 
-        </div>
-      </div>
+    .hero button {
+        background: #e81cff;
+        color: #1f293a;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        height: auto; /* Allow button height to adjust */
+    }
+
+    .hero button:hover {
+        background: #fff;
+        color: #1f293a;
+    }
+
+    .features {
+        padding: 4rem 2rem;
+        text-align: center;
+    }
+
+    .features h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        color: #00FFFF;
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .feature {
+        background-color: #212121;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .feature h3 {
+        color: #00FFFF;
+        margin-bottom: 1rem;
+    }
+
+    .feature p {
+        line-height: 1.6;
+    }
+
+    .cta {
+        padding: 4rem 2rem;
+        text-align: center;
+        background: linear-gradient(135deg, #34495e, #2c3e50);
+    }
+
+    .cta h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #00FFFF;
+    }
+</style>
+
+<div class="hero">
+    <h1>Unlock Your Academic Potential</h1>
+    <p>Empower your essays with AI-driven analysis and manage academic stress with our personalized tools. Join a community dedicated to your success.</p>
+    <div class="button-container">
+        <button onclick="location.href='{% url 'login' %}'">Login</button>
+        <button onclick="location.href='{% url 'register' %}'">Register</button>
     </div>
-</body>
-</html>
+</div>
+
+<div class="features">
+    <h2>Key Features</h2>
+    <div class="feature-grid">
+        <div class="feature">
+            <h3>AI Essay Analysis</h3>
+            <p>Receive detailed feedback on your writing, including grammar, style, and structure.</p>
+        </div>
+        <div class="feature">
+            <h3>Stress Management Tools</h3>
+            <p>Access personalized strategies and resources to help you manage academic stress effectively.</p>
+        </div>
+        <div class="feature">
+            <h3>Community Support</h3>
+            <p>Connect with peers, share experiences, and find encouragement in a supportive community.</p>
+        </div>
+    </div>
+</div>
+
+<div class="cta">
+    <h2>Ready to Transform Your Academic Journey?</h2>
+</div>
+
+{% endblock content %}

@@ -5,55 +5,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>List</title>
-  <link href="{% static 'css/output.css' %}" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width:device-width, initial-scale=1.0">
+    <title>List</title>
+    <link href="{% static 'css/output.css' %}" rel="stylesheet" />
+    <style>
+        body {
+            background: linear-gradient(to bottom, #1a1a1a, #222);
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #nav-cont {
+            padding-left: 1rem;
+        }
+
+        #nav-cont p {
+            margin: 0;
+        }
+
+        nav button {
+            background: #00FFFF;
+            color: #1f293a;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        nav button:hover {
+            background: #fff;
+            color: #1f293a;
+        }
+
+        #content {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        #top-cont p:first-child {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #00FFFF;
+        }
+
+        #top-cont p:last-child {
+            color: #ddd;
+        }
+
+        .card {
+            position: relative;
+            width: 350px;
+            height: 180px;
+            box-sizing: border-box;
+            background-color: #212121;
+            border: 5px solid #34495e;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            transition: all ease-in-out 0.3s;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            box-shadow: rgba(193, 44, 223, 0.19) 0px 10px 20px,
+                        rgba(193, 44, 223, 0.23) 0px 6px 6px,
+                        inset rgba(0, 0, 0, 0.19) 0px 10px 20px,
+                        inset rgba(0, 0, 0, 0.23) 0px 6px 6px;
+            border: 5px solid #e81cff; /* Pink border on hover */
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: #00FFFF;
+            cursor: default;
+        }
+
+        .card-des {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 400;
+            color: #ddd;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            display: -webkit-box;
+            word-break: break-all;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            cursor: default;
+        }
+
+        .card-text {
+            position: absolute;
+            margin: 0;
+            font-size: 14px;
+            font-weight: 400;
+            color: #00FFFF;
+            right: 20px;
+            bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            opacity: 0;
+            transition: all ease-in-out 0.3s;
+            animation: textanimate 0.8s alternate infinite;
+            cursor: pointer;
+        }
+
+        .card:hover > .card-text {
+            opacity: 1;
+        }
+
+        @keyframes textanimate {
+            0% {
+                right: 20px;
+            }
+
+            100% {
+                right: 10px;
+            }
+        }
+
+        .arrow-icon {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        #grid-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            padding: 1.5rem;
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
-  <!-- Navigation -->
-  <nav class="pt-1 pb-1 m-1 bg-gray-900 flex justify-between items-center">
-    <div id="nav-cont" class="pl-4 md:pl-40">
-      <p class="pt-6 capitalize text-white text-2xl md:text-3xl text-left">achieve your academic dreams</p>
-      <p class="pb-6 pt-2 px-2 capitalize text-white text-sm md:text-base">unlock your Potential</p>
-    </div>
-    
-    <button class="px-3 py-1 m-4 h-10 w-20 rounded-xl text-white border hover:bg-gray-700 transition duration-300" onclick="window.location.href='{% url 'home-page' %}'">Home</button>
-    
-    <button class="px-3 py-1 m-4 h-10 w-20 rounded-xl text-white border hover:bg-gray-700 transition duration-300" onclick="window.location.href='{% url 'profile' %}'">Profile</button>
-    
-    <button class="px-3 py-1 m-4 h-20 w-20 rounded-xl text-white border hover:bg-gray-700 transition duration-300" onclick="window.location.href='{% url 'post-create' %}'">New Post</button>
-  </nav>
-
-  <!-- Content -->
-  <div id="content" class="p-4">
-    <div id="top-cont" class="text-center">
-      <p class="text-3xl md:text-4xl p-4">Empower Your Academic Journey</p>
-      <p class="p-2 text-lg md:text-xl text-gray-700">
-        Discover the secret to academic success: Our comprehensive stress management platform. Unlock <br class="hidden md:block"> personalized strategies, expert support, and a thriving community to help you overcome challenges
-      </p>
-    </div>
-
-    <!-- Grid Content -->
-    {% if essays %}
-    <div id="grid-content" class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" {% if essay_item.pk %}
-    {% endif %}
-    >
-        {% for essay_item in essays %}
-                <div class="p-6 border bg-white rounded-lg shadow-md hover:shadow-lg hover:bg-gray-50 transition duration-300 transform hover:scale-105"> <a  href="{% url 'post-detail' essay_item.id%}">{{ essay_item.title }}</a>
-            <li>
-        <p>{{ essay_item.content }}</p>
-        <p>{{ essay_item.student}}</p>
-
-        <small>Uploaded on: {{ essay_item.created_at }}</small>
-            </li>
-    </div>
-    {% endfor %}
-    {% else %}
-    <p>You haven't uploaded any essays yet.</p>
-{% endif %}
+<body>
+    <nav>
+        <div id="nav-cont">
+            <p class="text-2xl md:text-3xl">achieve your academic dreams</p>
+            <p class="text-sm md:text-base">unlock your Potential</p>
         </div>
-  </div>
+        <button onclick="window.location.href='{% url 'home-page' %}'">Home</button>
+        <button onclick="window.location.href='{% url 'profile' %}'">Profile</button>
+        <button onclick="window.location.href='{% url 'post-create' %}'">New Post</button>
+    </nav>
+
+    <div id="content">
+        <div id="top-cont">
+            <p>Empower Your Academic Journey</p>
+            <p>Discover the secret to academic success: Our comprehensive stress management platform. Unlock personalized strategies, expert support, and a thriving community to help you overcome challenges</p>
+        </div>
+
+        {% if essays %}
+            <div id="grid-content">
+                {% for essay_item in essays %}
+                    <div class="card">
+                        <p class="card-title"><a href="{% url 'post-detail' essay_item.id %}">{{ essay_item.title }}</a></p>
+                        <p class="card-des">
+                            {{ essay_item.content }}
+                        </p>
+                        <p class="card-text">
+                            <span>View More</span>
+                            <svg class="arrow-icon" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
+                            </svg>
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>You haven't uploaded any essays yet.</p>
+        {% endif %}
+    </div>
 </body>
 </html>
 {% endblock content %}

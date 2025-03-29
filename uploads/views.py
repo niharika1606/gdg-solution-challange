@@ -6,6 +6,9 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import essay
 from django.urls import reverse_lazy
 from gemini.views import GenerateResponse
+from user.models import Profile
+from django.views import View
+
 class PostListView(LoginRequiredMixin,ListView):
     model = essay  
     template_name = 'uploads/essay_list.html'  
@@ -54,13 +57,9 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
         return response
 
+    
     def get_success_url(self):
-        """
-        Redirect after successful form submission.
-        """
-        return reverse_lazy('essay_list') 
-    def get_success_url(self):
-        return reverse_lazy('home-page') 
+        return reverse('post-detail', kwargs={'pk': self.object.pk})
 
 class PostDetailView(DetailView):
     model=essay
