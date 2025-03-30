@@ -4,171 +4,281 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Scereno</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background: linear-gradient(to bottom, #1a1a1a, #222);
-            color: #e0e0e0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 40px 20px;
-        }
+<style>
+    /* Container Styles - Updated for single row */
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1500px; /* Prevents stretching */
+    margin: 0 auto; /* Centers navbar */
+    padding: 15px 20px;
+    background: #000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Ensures it's centered */
+    z-index: 1000;
+}
 
-        .title-container {
-            width: 100%;
-            text-align: center;
-            padding: 60px 30px;
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            margin-bottom: 40px;
-        }
 
-        .title {
-            font-size: 3em;
-            color: #00FFFF;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            letter-spacing: 1px;
-        }
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #00FFFF;
+    text-shadow: 0 0 8px #00FFFF;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
 
-        .about-text {
-            max-width: 800px;
-            text-align: center;
-            margin-bottom: 50px;
-            line-height: 1.8;
-            font-size: 1.1em;
-            padding: 30px;
-            background: linear-gradient(135deg, #333, #444);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 35px;
+}
 
-        .about-text:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-        }
+.nav-links li {
+    position: relative;
+}
 
-        .about-text p {
-            margin-bottom: 25px;
-        }
+.nav-links a {
+    font-size: 1.1em;
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease-in-out;
+}
 
-        .team-title {
-            font-size: 2.5em;
-            color: #e94efa;
-            margin-bottom: 50px;
-            text-align: center;
-            letter-spacing: 1.5px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-        }
+/* Glowing Hover Effect */
+.nav-links a:hover {
+    color: #e81cff;
+    text-shadow: 0 0 10px #e81cff;
+}
 
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center; /* Center vertically */
-            gap: 30px;
-            margin-bottom: 60px;
-            background-color: #2a2a2a;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-            flex-wrap: wrap; /* Ensure cards wrap for smaller screens */
-            min-height: 450px; /* Increased height of container */
-        }
+/* Active Link Indicator */
+.nav-links li::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #e81cff, #40c9ff);
+    transition: all 0.3s ease-in-out;
+    transform: translateX(-50%);
+}
 
-        .card {
-            width: 200px; /* Reduced card width */
-            height: 200px; /* Making cards square */
-            background-color: #000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 25px; /* Reduced padding */
-            border-radius: 12px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
-            position: relative; /* Required for pseudo-elements */
-        }
+.nav-links li:hover::after {
+    width: 100%;
+}
 
-        .card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            left: -5px;
-            margin: auto;
-            width: calc(100% + 10px);
-            height: calc(100% + 10px);
-            border-radius: 12px;
-            background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100% );
-            z-index: -1;
-            pointer-events: none;
-            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+/* Responsive Navbar */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px 15px; /* Reduce padding */
+    }
 
-        .card::after {
-            content: "";
-            z-index: -1;
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100% );
-            transform: translate3d(0, 0, 0) scale(0.95);
-            filter: blur(20px);
-        }
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 8px;
+    }
+}
 
-        .card:hover::after {
-            filter: blur(30px);
-            background-color: black;/*after hovering background color*/
-        }
 
-        .card:hover::before {
-            transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
 
-        }
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap; /* Changed from wrap to nowrap */
+    gap: 60px; 
+    padding: 20px;
+    max-width: 1000px; /* Added max-width */
+    margin: 0 auto; /* Center the container */
+}
 
-        .card:hover {
-            transform: scale(1.05);
-            z-index: 1;
-        }
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+    .container {
+        flex-wrap: wrap; /* Wrap on smaller screens */
+    }
+    .card {
+        width: 160px;
+        height: 224px;
+    }
+}
 
-        .heading {
-            font-size: 1.2em; /* Reduced heading size */
-            color: #00FFFF;
-            margin-bottom: 10px; /* Reduced margin */
-            text-transform: capitalize;
-            font-weight: 600;
-        }
+/* Rest of your CSS remains exactly the same */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(to bottom, #1a1a1a, #222);
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* padding: 40px 20px; */
+}
 
-        .card p:not(.heading) {
-            font-size: 0.9em; /* Reduced text size */
-            margin-bottom: 8px; /* Reduced margin */
-            color: #ddd;
-        }
+.title-container {
+    width: 100%;
+    text-align: center;
+    padding: 60px 30px;
+    background: linear-gradient(135deg, #34495e, #2c3e50);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    margin-bottom: 40px;
+}
 
-        .card a {
-            color: #00FFFF;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+.title {
+    font-size: 3em;
+    color: #00FFFF;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+}
 
-        .card a:hover {
-            color: #8A2BE2;
-        }
+.about-text {
+    max-width: 800px;
+    text-align: center;
+    margin-bottom: 50px;
+    line-height: 1.8;
+    font-size: 1.1em;
+    padding: 30px;
+    background: linear-gradient(135deg, #333, #444);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            font-size: 0.9em;
-            border-top: 1px solid #444;
-        }
-    </style>
+.about-text:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.team-title {
+    font-size: 2.5em;
+    color: #e94efa;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: 1.5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.card {
+    position: relative;
+    width: 165px;
+    height: 234px;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 12px;
+    gap: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+    flex-shrink: 0; /* Prevents cards from shrinking */
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    left: -5px;
+    margin: auto;
+    width: 200px;
+    height: 264px;
+    border-radius: 10px;
+    background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
+    z-index: -10;
+    pointer-events: none;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card::after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
+    transform: translate3d(0, 0, 0) scale(0.95);
+    filter: blur(20px);
+}
+
+.card .heading {
+    font-size: 20px;
+    text-transform: capitalize;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.card p:last-child {
+    color: #e81cff;
+    font-weight: 600;
+}
+
+.card a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.card a:hover {
+    color: #00dbde;
+}
+
+.card:hover::after {
+    filter: blur(30px);
+}
+
+.card:hover::before {
+    transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
+}
+
+.footer {
+    margin-top: 60px;
+    padding: 2rem;
+    width: 1500px;
+    background-color: #1a1f2e;
+    text-align: center;
+}
+
+.footerText {
+    font-size: 1rem;
+    color: #9ca3af;
+}
+</style>
 </head>
 <body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Scereno</div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <!-- <li><a href="#">Team</a></li> -->
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Log Out</a></li>
+            </ul>
+        </nav>
+    </header>
+    
 
     <div class="title-container">
         <h1 class="title">About Us - Scereno</h1>
@@ -183,27 +293,33 @@
 
     <div class="container">
         <div class="card">
-            <p class="heading">Niharika Mangalpalli</p>
+            <h2 class="heading">Niharika Mangalpalli</h2>
             <p><a href="#" target="_blank">Backend Developer</a></p>
             <p><a href="#" target="_blank">Mail</a></p>
             <p><a href="#" target="_blank">LinkedIn</a></p>
         </div>
         <div class="card">
-            <p class="heading">Srushti Madhekar</p>
+            <h2 class="heading">Srushti Madhekar</h2>
             <p><a href="#" target="_blank">Lead Designer</a></p>
             <p><a href="#" target="_blank">Mail</a></p>
             <p><a href="#" target="_blank">LinkedIn</a></p>
         </div>
         <div class="card">
-            <p class="heading">Sushant Bhanwase</p>
+            <h2 class="heading">Sushant Bhanwase</h2>
             <p><a href="#" target="_blank">ML Specialist</a></p>
             <p><a href="#" target="_blank">Mail</a></p>
             <p><a href="#" target="_blank">LinkedIn</a></p>
         </div>
         <div class="card">
-            <p class="heading">Aditya Dudhagi</p>
+            <h2 class="heading">Aditya Dudhagi</h2>
             <p><a href="#" target="_blank">Frontend Developer</a></p>
             <p><a href="#" target="_blank">Mail</a></p>
             <p><a href="#" target="_blank">LinkedIn</a></p>
         </div>
     </div>
+
+    <footer class="footer">
+        <p class="footerText">&copy; 2025 Carrer Guider. All rights reserved.</p>
+    </footer>
+</body>
+</html>

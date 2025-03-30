@@ -48,7 +48,7 @@
         font-size: 1.1rem;
         cursor: pointer;
         transition: background 0.3s ease;
-        height: auto; /* Allow button height to adjust */
+        height: auto;
     }
 
     .hero button:hover {
@@ -107,9 +107,14 @@
 <div class="hero">
     <h1>Unlock Your Academic Potential</h1>
     <p>Empower your essays with AI-driven analysis and manage academic stress with our personalized tools. Join a community dedicated to your success.</p>
+    
     <div class="button-container">
-        <button onclick="location.href='{% url 'login' %}'">Login</button>
-        <button onclick="location.href='{% url 'register' %}'">Register</button>
+        {% if user.is_authenticated %}
+            <button onclick="location.href='{% url 'logout' %}'">Logout</button>
+        {% else %}
+            <button onclick="location.href='{% url 'login' %}'">Login</button>
+            <button onclick="location.href='{% url 'register' %}'">Register</button>
+        {% endif %}
     </div>
 </div>
 

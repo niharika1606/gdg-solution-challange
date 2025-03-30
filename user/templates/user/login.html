@@ -9,8 +9,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Scereno</title>
     <style>
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            transition: background-color 5000s ease-in-out 0s;
+            -webkit-text-fill-color: #e0e0e0;
+        }
+
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -21,9 +30,10 @@
         }
 
         .container {
+            margin-top: auto;
             position: relative;
             width: 500px;
-            height: 500px;
+            height: 700px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -36,7 +46,7 @@
             left: 0;
             width: 32px;
             height: 6px;
-            background: #34495e;
+            background: #b51fcc;
             border-radius: 80px;
             transform-origin: 250px;
             transform: rotate(calc(var(--i) * (360deg / 50)));
@@ -46,7 +56,7 @@
 
         @keyframes blink {
             0% {
-                background: #00FFFF;
+                background: #09b4d6;
             }
             25% {
                 background: #34495e;
@@ -58,24 +68,33 @@
             width: 80%;
             max-width: 300px;
             z-index: 1;
-            padding: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
         }
 
         form {
             width: 100%;
-            padding: 0 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         h2 {
             font-size: 1.8em;
             color: #00FFFF;
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            width: 100%;
         }
 
         .input-box {
             position: relative;
             margin: 15px 0;
+            width: 100%;
+            max-width: 280px;
         }
 
         input {
@@ -87,8 +106,9 @@
             border-radius: 40px;
             font-size: 1em;
             color: #e0e0e0;
-            padding: 0 15px;
+            padding: 0 20px;
             transition: 0.5s ease;
+            box-sizing: border-box;
         }
 
         input:focus {
@@ -107,7 +127,7 @@
         label {
             position: absolute;
             top: 50%;
-            left: 15px;
+            left: 20px;
             transform: translateY(-50%);
             font-size: 1em;
             pointer-events: none;
@@ -116,18 +136,25 @@
         }
 
         .forgot-pass {
-            margin: -10px 0 10px;
+            margin: -5px 0 15px;
             text-align: center;
+            width: 100%;
         }
 
         .forgot-pass a {
             font-size: 0.85em;
             color: #e0e0e0;
             text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-pass a:hover {
+            color: #00FFFF;
         }
 
         .btn {
             width: 100%;
+            max-width: 280px;
             height: 45px;
             background: #00FFFF;
             border: none;
@@ -137,11 +164,18 @@
             font-size: 1em;
             color: #1f293a;
             font-weight: 600;
+            transition: background 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .btn:hover {
+            background: #09b4d6;
         }
 
         .signup-link {
             margin: 10px 0;
             text-align: center;
+            width: 100%;
         }
 
         .signup-link a {
@@ -149,28 +183,24 @@
             color: #00FFFF;
             text-decoration: none;
             font-weight: 600;
+            transition: color 0.3s ease;
         }
 
-        /* Custom Crispy Forms Styling - Increased Specificity */
-        .login-box form .form-group {
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
+        .signup-link a:hover {
+            color: #09b4d6;
         }
 
-        .login-box form .form-group label {
-            margin-bottom: 5px;
-            text-align: left;
+        .footer {
+            margin-top: auto;
+            width: 1500px;
+            padding: 2rem;
+            background-color: #1a1f2e;
+            text-align: center;
         }
 
-        .login-box form .form-group input {
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        /* Adjust Placeholder Alignment */
-        .login-box form .form-group input::placeholder {
-            text-align: left; /* Align placeholders to the left */
+        .footerText {
+            font-size: 1rem;
+            color: #9ca3af;
         }
     </style>
 </head>
@@ -178,15 +208,22 @@
     <div class="container">
         <div class="login-box">
             <h2>Login</h2>
-            <form method="POST">
+            <form action="#" method="post" autocomplete="off">
                 {% csrf_token %}
-                {{ form|crispy }}
+                <div class="input-box">
+                    <input type="text" name="{{ form.username.name }}" value="" autocomplete="username" required />
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <input type="password" name="{{ form.password.name }}" value="" autocomplete="new-password" required />
+                    <label>Password</label>
+                </div>
                 <div class="forgot-pass">
                     <a href="#">Forgot your password?</a>
                 </div>
                 <button class="btn" type="submit">Login</button>
                 <div class="signup-link">
-                    <a href="{% url 'register' %}">Sign Up</a>
+                    <a href="#">Sign Up</a>
                 </div>
             </form>
         </div>
