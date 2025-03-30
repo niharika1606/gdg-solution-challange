@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,HttpResponse
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib import messages
-from .forms import UserRegistrationForm,UserUpdateForm
+from .forms import UserRegistrationForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 import uuid

@@ -76,9 +76,12 @@ def superuser_dashboard(request):
 
     total_positive = sum(profile.positive for profile in profiles)
     total_negative = sum(profile.negative for profile in profiles)
+    
     total_neutral = sum(profile.neutral for profile in profiles)
 
     # Calculate progress percentage
+    total_score = total_positive + total_negative
+    progress_percentage = (total_positive / total_score) * 100 if total_score > 0 else 0
 
     context = {
         'profiles': profiles,
