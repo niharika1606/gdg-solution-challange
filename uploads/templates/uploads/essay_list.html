@@ -16,40 +16,90 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        nav {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            padding: 1rem;
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            background: #000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
         }
-
-        #nav-cont {
-            padding-left: 1rem;
-        }
-
-        #nav-cont p {
-            margin: 0;
-        }
-
-        nav button {
-            background: #00FFFF;
-            color: #1f293a;
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 0.5rem;
+        
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #00FFFF;
+            text-shadow: 0 0 8px #00FFFF;
+            letter-spacing: 1px;
             cursor: pointer;
-            transition: background 0.3s ease;
         }
-
-        nav button:hover {
-            background: #fff;
-            color: #1f293a;
+        
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 35px;
         }
-
+        
+        .nav-links li {
+            position: relative;
+        }
+        
+        .nav-links a {
+            font-size: 1.1em;
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        .nav-links a:hover {
+            color: #e81cff;
+            text-shadow: 0 0 10px #e81cff;
+        }
+        
+        .nav-links li::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #e81cff, #40c9ff);
+            transition: all 0.3s ease-in-out;
+            transform: translateX(-50%);
+        }
+        
+        .nav-links li:hover::after {
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 10px 15px;
+            }
+        
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+                padding-top: 8px;
+            }
+        }
+        
         #content {
             padding: 2rem;
             text-align: center;
+            /* Added padding-top to account for the fixed navbar */
+            padding-top: 80px; /* Adjust this value as needed */
         }
 
         #top-cont p:first-child {
@@ -85,7 +135,7 @@
                         rgba(193, 44, 223, 0.23) 0px 6px 6px,
                         inset rgba(0, 0, 0, 0.19) 0px 10px 20px,
                         inset rgba(0, 0, 0, 0.23) 0px 6px 6px;
-            border: 5px solid #e81cff; /* Pink border on hover */
+            border: 5px solid #e81cff;
         }
 
         .card-title {
@@ -155,15 +205,24 @@
     </style>
 </head>
 <body>
-    <nav>
-        <div id="nav-cont">
-            <p class="text-2xl md:text-3xl">achieve your academic dreams</p>
-            <p class="text-sm md:text-base">unlock your Potential</p>
-        </div>
-        <button onclick="window.location.href='{% url 'home-page' %}'">Home</button>
-        <button onclick="window.location.href='{% url 'profile' %}'">Profile</button>
-        <button onclick="window.location.href='{% url 'post-create' %}'">New Post</button>
-    </nav>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">Scereno</div>
+            <ul class="nav-links">
+                <li><a href="{% url 'home-page' %}">Home</a></li>
+
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'post-create' %}">New Essay</a></li>
+
+                {% if request.user.is_superuser %}
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                {%endif%}
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+                
+            </ul>
+        </nav>
+    </header>
 
     <div id="content">
         <div id="top-cont">
@@ -175,12 +234,12 @@
             <div id="grid-content">
                 {% for essay_item in essays %}
                     <div class="card">
-                        <p class="card-title"><a href="{% url 'post-detail' essay_item.id %}">{{ essay_item.title }}</a></p>
+                        <p class="card-title">{{ essay_item.title }}</p>
                         <p class="card-des">
                             {{ essay_item.content }}
                         </p>
                         <p class="card-text">
-                            <span>View More</span>
+                            <span><a href="{% url 'post-detail' essay_item.id %}">View More</a></span>
                             <svg class="arrow-icon" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
                             </svg>

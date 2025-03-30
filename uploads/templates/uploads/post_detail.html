@@ -3,6 +3,89 @@
 {% block content %}
 
 <style>
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 1500px; /* Prevents stretching */
+        margin: 0 auto; /* Centers navbar */
+        padding: 15px 20px;
+        background: #000;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%); /* Ensures it's centered */
+        z-index: 1000;
+    }
+    
+    
+    .logo {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #00FFFF;
+        text-shadow: 0 0 8px #00FFFF;
+        letter-spacing: 1px;
+        cursor: pointer;
+    }
+    
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 35px;
+    }
+    
+    .nav-links li {
+        position: relative;
+    }
+    
+    .nav-links a {
+        font-size: 1.1em;
+        color: #e0e0e0;
+        text-decoration: none;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        transition: color 0.3s ease-in-out;
+    }
+    
+    /* Glowing Hover Effect */
+    .nav-links a:hover {
+        color: #e81cff;
+        text-shadow: 0 0 10px #e81cff;
+    }
+    
+    /* Active Link Indicator */
+    .nav-links li::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -5px;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #e81cff, #40c9ff);
+        transition: all 0.3s ease-in-out;
+        transform: translateX(-50%);
+    }
+    
+    .nav-links li:hover::after {
+        width: 100%;
+    }
+    
+    /* Responsive Navbar */
+    @media (max-width: 768px) {
+        .navbar {
+            flex-direction: column;
+            padding: 10px 15px; /* Reduce padding */
+        }
+    
+        .nav-links {
+            flex-direction: column;
+            gap: 10px;
+            padding-top: 8px;
+        }
+    }
+    
     body {
         background: linear-gradient(to bottom, #1a1a1a, #222);
         color: #e0e0e0;
@@ -77,7 +160,23 @@
         margin: 2rem 0;
     }
 </style>
+<header>
+    <nav class="navbar">
+        <div class="logo">Scereno</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home-page' %}">Home</a></li>
 
+            <li><a href="{% url 'about' %}">About</a></li>
+            {% if request.user.is_superuser %}
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            {%endif%}
+            <!-- <li><a href="#">Team</a></li> -->
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Profile</a></li> 
+            {%endif%}
+        </ul>
+    </nav>
+</header>
 <div class="content-container">
     <article class="media content-section">
         <div class="media-body">

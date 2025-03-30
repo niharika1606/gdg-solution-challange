@@ -32,6 +32,7 @@ from gemini import views as gem_view
 
 urlpatterns = [
     path('admin/', admin.site.urls), 
+    path('dashboard/', up_views.superuser_dashboard,name='dashboard'), 
     path('register/',user_views.registeruser,name='register'),
     path('new/',PostCreateView.as_view(),name='post-create'),
     path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='login'),

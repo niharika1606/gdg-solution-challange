@@ -26,7 +26,7 @@ def registeruser(request):
 @login_required
 def custom_logout(request):
     logout(request)  # Log the user out
-    return render(request, 'user/logout.html') 
+    return render(request, 'uploads/home.html') 
 
 @login_required
 def profile_view(request):

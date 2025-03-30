@@ -269,12 +269,12 @@ body {
         <nav class="navbar">
             <div class="logo">Scereno</div>
             <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
+                <li><a href="{% url 'home-page' %}">Home</a></li>
+                {% if request.user.is_superuser %}
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                {%endif%}
                 <!-- <li><a href="#">Team</a></li> -->
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Log Out</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
             </ul>
         </nav>
     </header>

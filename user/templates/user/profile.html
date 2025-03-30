@@ -1,3 +1,20 @@
+<header>
+<nav class="navbar">
+    <div class="logo">Scereno</div>
+    <ul class="nav-links">
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'list-page' %}">History</a></li>
+
+        {% if request.user.is_superuser %}
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        {%endif%}
+        <!-- <li><a href="#">Team</a></li> -->
+        <li><a href="{% url 'home-page' %}">Home</a></li>
+        <li><a href="{% url 'post-create' %}">New Essay</a></li>
+
+    </ul>
+</nav>
+</header>
 <div class="container mt-4">
   <h2 class="text-center">Your Progress</h2>
   

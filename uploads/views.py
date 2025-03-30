@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from gemini.views import GenerateResponse
 from user.models import Profile
 from django.views import View
+from django.contrib.auth.decorators import user_passes_test
 
 class PostListView(LoginRequiredMixin,ListView):
     model = essay  
@@ -70,3 +71,20 @@ def home(request):
 
 def about(request):
     return render(request, "uploads/about.html")
+def superuser_dashboard(request):
+    profiles = Profile.objects.all()
+
+    total_positive = sum(profile.positive for profile in profiles)
+    total_negative = sum(profile.negative for profile in profiles)
+    total_neutral = sum(profile.neutral for profile in profiles)
+
+    # Calculate progress percentage
+
+    context = {
+        'profiles': profiles,
+        'total_positive': total_positive,
+        'total_negative': total_negative,
+        'total_neutral': total_neutral,
+    }
+
+    return render(request, 'uploads/dashboard.html', context)
