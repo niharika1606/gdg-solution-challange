@@ -117,13 +117,20 @@
 
         input[value]:not([value=""]) ~ label,
         input:focus ~ label {
+            
             top: -10px;
             font-size: 0.8em;
             background: #1f293a;
             padding: 0 6px;
             color: #00FFFF;
         }
-
+        .input-box input:not(:placeholder-shown)~label{
+            top:-10px;
+            font-size: 0.8em;
+            background: #1f293a;
+            padding: 0 6px;
+            color: #00FFFF;
+        }
         label {
             position: absolute;
             top: 50%;
