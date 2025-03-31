@@ -5,11 +5,8 @@ from .models import Profile
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField()
-    avatar = forms.ChoiceField(
-    widget=forms.RadioSelect
-    )
     class Meta:
         model = User
-        fields = ['avatar','username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2']
        
 

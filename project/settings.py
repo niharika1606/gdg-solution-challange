@@ -171,3 +171,11 @@ GOOGLE_CLOUD_API_KEY = os.getenv('GOOGLE_CLOUD_API_KEY')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4' 
+
+
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT = 587  
+EMAIL_USE_TLS = True  # Or EMAIL_USE_SSL for port 465
+EMAIL_HOST_USER = 'mangalpalliniharika@gmail.com'  # Your email address
+EMAIL_HOST_PASSWORD = 'cxfk cpxz dnrl wttd' 
