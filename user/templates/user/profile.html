@@ -1,209 +1,145 @@
 {% extends "uploads/base.html" %}
-{% load static %}
 {% block content %}
-
-<style>
-    body {
-        background: linear-gradient(to bottom, #1a1a1a, #222);
-        color: #e0e0e0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        padding: 0;
-    }
-
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        max-width: 1500px;
-        margin: 0 auto;
-        padding: 15px 20px;
-        background: #000;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-        position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1000;
-    }
-
-    .logo {
-        font-size: 1.8em;
-        font-weight: bold;
-        color: #00FFFF;
-        text-shadow: 0 0 8px #00FFFF;
-        letter-spacing: 1px;
-        cursor: pointer;
-    }
-
-    .nav-links {
-        list-style: none;
-        display: flex;
-        gap: 35px;
-    }
-
-    .nav-links li {
-        position: relative;
-    }
-
-    .nav-links a {
-        font-size: 1.1em;
-        color: #e0e0e0;
-        text-decoration: none;
-        font-weight: 500;
-        letter-spacing: 0.5px;
-        transition: color 0.3s ease-in-out;
-    }
-
-    .nav-links a:hover {
-        color: #e81cff;
-        text-shadow: 0 0 10px #e81cff;
-    }
-
-    .nav-links li::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        bottom: -5px;
-        width: 0;
-        height: 2px;
-        background: linear-gradient(90deg, #e81cff, #40c9ff);
-        transition: all 0.3s ease-in-out;
-        transform: translateX(-50%);
-    }
-
-    .nav-links li:hover::after {
-        width: 100%;
-    }
-
-    @media (max-width: 768px) {
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        /* Container Styles - Updated for single row */
+        /* Navbar Styling */
         .navbar {
-            flex-direction: column;
-            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1500px; /* Prevents stretching */
+            margin: 0 auto; /* Centers navbar */
+            padding: 15px 20px;
+            background: #000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%); /* Ensures it's centered */
+            z-index: 1000;
         }
-
+        
+        
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #00FFFF;
+            text-shadow: 0 0 8px #00FFFF;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+        
         .nav-links {
-            flex-direction: column;
-            gap: 10px;
-            padding-top: 8px;
+            list-style: none;
+            display: flex;
+            gap: 35px;
         }
-    }
-
-    .profile-container {
-        padding-top: 100px; /* Adjust as needed */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        background: linear-gradient(to bottom, #1a1a1a, #222);
-        color: #e0e0e0;
-        text-align: center;
-    }
-
-    .profile-card {
-        background: #212121;
-        border-radius: 15px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-        padding: 3rem;
-        width: 80%;
-        max-width: 600px;
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    }
-
-    .profile-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
-    }
-
-    .profile-card h2 {
-        color: #00FFFF;
-        margin-bottom: 2rem;
-        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        animation: glow 2s ease-in-out infinite alternate;
-    }
-
-    .profile-card p {
-        font-size: 1.2rem;
-        margin-bottom: 1.5rem;
-        color: #ddd;
-        text-shadow: 0 0 3px rgba(224, 224, 224, 0.2);
-        animation: fadeIn 1s ease-in-out;
-    }
-
-    .progress-bar {
-        width: 100%;
-        background: #333;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
-        margin-top: 2rem;
-    }
-
-    .progress-bar div {
-        color: white;
-        text-align: center;
-        padding: 10px;
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: width 0.5s ease-in-out;
-    }
-
-    .positive-bar {
-        background: linear-gradient(to right, #4CAF50, #8BC34A);
-        border-radius: 10px 0 0 10px;
-    }
-
-    .negative-bar {
-        background: linear-gradient(to right, #F44336, #E57373);
-        border-radius: 0 10px 10px 0;
-        margin-left: auto;
-    }
-
-    @keyframes glow {
-        0% { text-shadow: 0 0 10px rgba(0, 255, 255, 0.5); }
-        100% { text-shadow: 0 0 20px rgba(0, 255, 255, 0.8); }
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-</style>
-
+        
+        .nav-links li {
+            position: relative;
+        }
+        
+        .nav-links a {
+            font-size: 1.1em;
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        /* Glowing Hover Effect */
+        .nav-links a:hover {
+            color: #e81cff;
+            text-shadow: 0 0 10px #e81cff;
+        }
+        
+        /* Active Link Indicator */
+        .nav-links li::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #e81cff, #40c9ff);
+            transition: all 0.3s ease-in-out;
+            transform: translateX(-50%);
+        }
+        
+        .nav-links li:hover::after {
+            width: 100%;
+        }
+        
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 10px 15px; /* Reduce padding */
+            }
+        
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+                padding-top: 8px;
+            }
+        }
+        
+    </style>
 <header>
     <nav class="navbar">
         <div class="logo">Scereno</div>
         <ul class="nav-links">
             <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'list-page' %}">History</a></li>
             {% if request.user.is_superuser %}
             <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
             {% endif %}
-            <li><a href="{% url 'home-page' %}">Home</a></li>
             <li><a href="{% url 'post-create' %}">New Essay</a></li>
         </ul>
     </nav>
 </header>
-
-<div class="profile-container">
-    {% if profile %}
-    <div class="profile-card">
-        <h2>Your Profile</h2>
-        <p><strong>Username:</strong> {{ request.user.username }}</p>
-        <p><strong>Email:</strong> {{ request.user.email }}</p>
-        <p><strong>Total Posts:</strong> {{ profile.total_posts }}</p>
-        <div class="progress-bar">
-            <div class="positive-bar" style="width: {{ profile.positive }}%;">Positive: {{ profile.positive }}%</div>
-            <div class="negative-bar" style="width: {{ profile.negative }}%;">Negative: {{ profile.negative }}%</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="{% static 'uploads/css/output.css' %}" />
+  </head>
+  <body class="bg-black flex justify-center items-center min-h-screen">
+    <div id="total" class="p-10 w-full max-w-md">
+      <div id="card" class="bg-gradient-to-br from-[#0a0f1f] to-[#1e3a8a] p-8 rounded-3xl shadow-2xl text-white text-center border border-blue-500">
+        <div id="prof-pic" class="flex justify-center">
+          <img src="{% static 'uploads/images/first.png' %}" class="h-36 w-36 rounded-full border-4 border-blue-400 shadow-xl transition-transform transform hover:scale-105" alt="Profile Picture" />
         </div>
-    </div>
-    {% else %}
-    <p>No profile data available yet.</p>
-    {% endif %}
-</div>
+        <div id="content" class="mt-6">
+          <h2 class="text-2xl font-extrabold tracking-wide">{{ request.user.username }}</h2>
+          <h3 class="text-blue-300 text-lg font-light"> {{ request.user.email }}</h3>
+        </div>
 
+        <div id="info" class="flex justify-around mt-8 text-lg">
+          <div class="text-center bg-[#112244] p-4 rounded-xl shadow-md w-24 transition-transform transform hover:scale-110 hover:bg-blue-500 hover:text-white">
+            <p class="text-blue-300">Positive</p>
+            <p class="font-bold text-lg">{{ profile.positive }}</p>
+          </div>
+          <div class="text-center bg-[#112244] p-4 rounded-xl shadow-md w-24 transition-transform transform hover:scale-110 hover:bg-gray-500 hover:text-white">
+            <p class="text-blue-300">Neutral</p>
+            <p class="font-bold text-lg">{{ profile.neutral }}</p>
+          </div>
+          <div class="text-center bg-[#112244] p-4 rounded-xl shadow-md w-24 transition-transform transform hover:scale-110 hover:bg-red-500 hover:text-white">
+            <p class="text-blue-300">Negative</p>
+            <p class="font-bold text-lg">{{ profile.negative }}</p>
+          </div>
+        </div>
+
+        <div id="btns" class="flex justify-around mt-10">
+          <a href="{% url 'post-create' %}" class="bg-blue-500 hover:bg-blue-400 text-white font-semibold rounded-full px-6 py-3 transition-all shadow-xl transform hover:scale-105">Upload</a>
+          <a href="{% url 'list-page' %}" class="bg-blue-500 hover:bg-blue-400 text-white font-semibold rounded-full px-6 py-3 transition-all shadow-xl transform hover:scale-105">View All Posts</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
 {% endblock content %}
