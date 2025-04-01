@@ -1,268 +1,284 @@
 <header>
-    <nav class="navbar">
-        <div class="logo">Scereno</div>
-        <ul class="nav-links">
-            <li><a href="{% url 'home-page' %}">Home</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'profile' %}">Profile</a></li>
-        </ul>
-    </nav>
+  <nav class="navbar">
+    <div class="logo">Scereno</div>
+    <ul class="nav-links">
+      <li><a href="{% url 'home-page' %}">Home</a></li>
+      <li><a href="{% url 'about' %}">About</a></li>
+      <li><a href="{% url 'profile' %}">Profile</a></li>
+    </ul>
+  </nav>
 </header>
 <h2 class="dashboard-title">Emotion-O-Meter!</h2>
-<p>See how your students are really feeling! Get the lowdown on positive, negative, and 'meh' vibes in their work. Help them shine!</p>
+<p>
+  See how your students are really feeling! Get the lowdown on positive,
+  negative, and 'meh' vibes in their work. Help them shine!
+</p>
 
 <div class="table-container">
-    <table class="custom-table">
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Positive Score</th>
-                <th>Neutral Score</th>
-                <th>Negative Score</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for profile in profiles %}
-            <tr>
-                <td>{{ profile.user.username }}</td>
-                <td class="positive-cell">{{ profile.positive }}</td>
-                <td class="positive-cell">{{ profile.neutral }}</td>
-                <td class="negative-cell">{{ profile.negative }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Positive Score</th>
+        <th>Neutral Score</th>
+        <th>Negative Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for profile in profiles %}
+      <tr>
+        <td>{{ profile.user.username }}</td>
+        <td class="positive-cell">{{ profile.positive }}</td>
+        <td class="neutral-cell">{{ profile.neutral }}</td>
+        <td class="negative-cell">{{ profile.negative }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 
 <style>
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        max-width: 1500px;
-        margin: 0 auto;
-        padding: 15px 20px;
-        background: #000;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-        position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1000;
-    }
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    background: #000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+  }
 
-    .logo {
-        font-size: 1.8em;
-        font-weight: bold;
-        color: #00FFFF;
-        text-shadow: 0 0 8px #00FFFF;
-        letter-spacing: 1px;
-        cursor: pointer;
+  .logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #00ffff;
+    text-shadow: 0 0 8px #00ffff;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 35px;
+  }
+
+  .nav-links li {
+    position: relative;
+  }
+
+  .nav-links a {
+    font-size: 1.1em;
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease-in-out;
+  }
+
+  .nav-links a:hover {
+    color: #e81cff;
+    text-shadow: 0 0 10px #e81cff;
+  }
+
+  .nav-links li::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #e81cff, #40c9ff);
+    transition: all 0.3s ease-in-out;
+    transform: translateX(-50%);
+  }
+
+  .nav-links li:hover::after {
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      padding: 10px 15px;
     }
 
     .nav-links {
-        list-style: none;
-        display: flex;
-        gap: 35px;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 8px;
+    }
+  }
+
+  body {
+    background: linear-gradient(to bottom, #1a1a1a, #222);
+    color: #e0e0e0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dashboard-title {
+    font-size: 2.5rem;
+    color: #00ffff;
+    text-align: center;
+    margin-bottom: 30px;
+    animation: fadeIn 1.5s ease-in-out;
+    letter-spacing: 1.5px;
+  }
+
+  .table-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+    border-radius: 12px;
+    background: #1f293a;
+    animation: slideIn 1.5s ease-in-out;
+  }
+
+  .custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #e0e0e0;
+    font-size: 1.2rem;
+  }
+
+  thead {
+    background: #34495e;
+    color: #00ffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  th,
+  td {
+    padding: 18px 25px;
+    text-align: center;
+  }
+
+  th {
+    font-weight: bold;
+  }
+
+  tbody tr {
+    transition: all 0.3s ease-in-out;
+  }
+
+  tbody tr:hover {
+    background: #00ffff;
+    color: #fff;
+    transform: scale(1.03);
+    transition: 0.3s ease;
+    cursor: pointer;
+  }
+
+  .positive-cell {
+    color: #09d300;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  .neutral-cell {
+    color: yellow;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .negative-cell {
+    color: #e74c3c;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #2c3e50;
+  }
+
+  tbody tr:nth-child(odd) {
+    background: #1f293a;
+  }
+
+  .positive-cell:hover {
+    background: #09d300;
+    color: #fff;
+    transform: scale(1.1);
+  }
+  .neutral-cell:hover {
+    background: #ffbb00;
+    color: #fff;
+    transform: scale(1.1);
+  }
+
+  .negative-cell:hover {
+    background: red;
+    color: #fff;
+    text-align: center;
+    transform: scale(1.1);
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px);
     }
 
-    .nav-links li {
-        position: relative;
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px);
     }
 
-    .nav-links a {
-        font-size: 1.1em;
-        color: #e0e0e0;
-        text-decoration: none;
-        font-weight: 500;
-        letter-spacing: 0.5px;
-        transition: color 0.3s ease-in-out;
+    100% {
+      opacity: 1;
+      transform: translateX(0);
     }
+  }
 
-    .nav-links a:hover {
-        color: #e81cff;
-        text-shadow: 0 0 10px #e81cff;
-    }
-
-    .nav-links li::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        bottom: -5px;
-        width: 0;
-        height: 2px;
-        background: linear-gradient(90deg, #e81cff, #40c9ff);
-        transition: all 0.3s ease-in-out;
-        transform: translateX(-50%);
-    }
-
-    .nav-links li:hover::after {
-        width: 100%;
-    }
-
-    @media (max-width: 768px) {
-        .navbar {
-            flex-direction: column;
-            padding: 10px 15px;
-        }
-
-        .nav-links {
-            flex-direction: column;
-            gap: 10px;
-            padding-top: 8px;
-        }
-    }
-
-    body {
-        background: linear-gradient(to bottom, #1a1a1a, #222);
-        color: #e0e0e0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .custom-table th,
+    .custom-table td {
+      padding: 12px 10px;
+      font-size: 1rem;
     }
 
     .dashboard-title {
-        font-size: 2.5rem;
-        color: #00FFFF;
-        text-align: center;
-        margin-bottom: 30px;
-        animation: fadeIn 1.5s ease-in-out;
-        letter-spacing: 1.5px;
+      font-size: 2rem;
+    }
+  }
+
+  /* Additional Mobile Adjustments */
+  @media (max-width: 600px) {
+    .custom-table {
+      font-size: 0.9rem; /* Smaller font on very small screens */
+    }
+
+    th,
+    td {
+      padding: 10px 8px; /* Smaller padding on very small screens */
     }
 
     .table-container {
-        width: 90%;
-        max-width: 1100px;
-        margin: 0 auto;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
-        border-radius: 12px;
-        background: #1f293a;
-        animation: slideIn 1.5s ease-in-out;
+      width: 95%; /* Make table container wider on mobile */
     }
-
-    .custom-table {
-        width: 100%;
-        border-collapse: collapse;
-        color: #e0e0e0;
-        font-size: 1.2rem;
-    }
-
-    thead {
-        background: #34495e;
-        color: #00FFFF;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    th, td {
-        padding: 18px 25px;
-        text-align: center;
-    }
-
-    th {
-        font-weight: bold;
-    }
-
-    tbody tr {
-        transition: all 0.3s ease-in-out;
-    }
-
-    tbody tr:hover {
-        background: #00FFFF;
-        color: #1f293a;
-        transform: scale(1.03);
-        transition: 0.3s ease;
-        cursor: pointer;
-    }
-
-    .positive-cell {
-        color: #09d300;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-
-    .negative-cell {
-        color: #e74c3c;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-
-    tbody tr:nth-child(even) {
-        background: #2c3e50;
-    }
-
-    tbody tr:nth-child(odd) {
-        background: #1f293a;
-    }
-
-    .positive-cell:hover {
-        background: #09d300;
-        color: #fff;
-        transform: scale(1.1);
-    }
-
-    .negative-cell:hover {
-        background: #e74c3c;
-        color: #fff;
-        transform: scale(1.1);
-    }
-
-    @keyframes fadeIn {
-        0% {
-            opacity: 0;
-            transform: translateY(-30px);
-        }
-
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes slideIn {
-        0% {
-            opacity: 0;
-            transform: translateX(-100px);
-        }
-
-        100% {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-        .custom-table th,
-        .custom-table td {
-            padding: 12px 10px;
-            font-size: 1rem;
-        }
-
-        .dashboard-title {
-            font-size: 2rem;
-        }
-    }
-
-    /* Additional Mobile Adjustments */
-    @media (max-width: 600px) {
-        .custom-table {
-            font-size: 0.9rem; /* Smaller font on very small screens */
-        }
-
-        th, td {
-            padding: 10px 8px; /* Smaller padding on very small screens */
-        }
-
-        .table-container{
-            width: 95%; /* Make table container wider on mobile */
-        }
-    }
+  }
 </style>
