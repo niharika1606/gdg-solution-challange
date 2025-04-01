@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse  
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import essay
 from django.urls import reverse_lazy
@@ -46,12 +45,12 @@ class PostCreateView(LoginRequiredMixin, CreateView):
             form.instance.results = result  # Save ML result in the essay
             form.instance.save()
 
-            messages.success(self.request, "Done! Your words are out there. Keep up the great work!")
+            messages.success(self.request,"🎊 Surprise! The mentorship results are here. Spoiler alert: You’re awesome!")
 
         except Exception as e:
             form.instance.results = f"Error: {str(e)}"
             form.instance.save()
-            messages.error(self.request, f"Error generating ML result: {str(e)}")
+            messages.error(self.request, f'🛑 Oops! Something went wrong while generating the ML result: {str(e)}')
 
         return response
 

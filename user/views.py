@@ -14,11 +14,11 @@ def registeruser(request):
         if form.is_valid():
             username=form.cleaned_data.get('username')
             form.save()
-            messages.success(request,f'Account created Successfully!\nYou can to LogIn Now')
+            messages.success(request,f'🚀 Boom! Your account is live. Time to explore—log in and get started!')
             return redirect('login')
         else:
             # If the form is invalid, render the same page with form errors
-            messages.success(request,f'try again!')    
+            messages.success(request,f'🔄 Oops! Something went wrong. Give it another shot!')    
             return render(request, 'user/register.html', {'form': form})
     else:
      form=UserRegistrationForm()

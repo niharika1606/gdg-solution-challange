@@ -226,6 +226,71 @@
             font-size: 2rem; /* Smaller CTA title on mobile */
         }
     }
+    .message-card {
+        position: fixed;
+        bottom: 40px;
+        right: 20px;
+        width: 300px;
+        background: linear-gradient(135deg, #2c3e50, #34495e);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 1000;
+        overflow: hidden; /* Hide overflow for animation effect */
+    }
+
+    .message-card.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .message-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .message-card li {
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        text-align: left;
+    }
+
+    .message-card .success {
+        background-color: rgba(76, 175, 80, 0.8);
+        color: white;
+    }
+
+    .message-card .error {
+        background-color: rgba(244, 67, 54, 0.8);
+        color: white;
+    }
+
+    .message-card .warning {
+        background-color: rgba(255, 152, 0, 0.8);
+        color: white;
+    }
+
+    .message-card .info {
+        background-color: rgba(33, 150, 243, 0.8);
+        color: white;
+    }
+    
+    /* Animation for card appearance */
+    @keyframes slideUp {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
 </style>
 
 <header>
@@ -241,6 +306,15 @@
             <li><a href="{% url 'profile' %}">Profile</a></li>
         </ul>
     </nav>
+    {% if messages %}
+    <div class="message-card show">
+        <ul>
+            {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
 </header>
 <div class="hero" style="padding-top: 160px;">
     <h1>Welcome to Scereno</h1>
