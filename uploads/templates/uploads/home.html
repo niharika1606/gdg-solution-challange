@@ -228,67 +228,93 @@
     }
     .message-card {
         position: fixed;
-        bottom: 40px;
+        top: 500px; /* Slightly lower from the top */
         right: 20px;
-        width: 300px;
-        background: linear-gradient(135deg, #2c3e50, #34495e);
+        width: 90%;
+        max-width: 350px;
+        background: rgba(30, 30, 30, 0.9);
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         padding: 20px;
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(-20px);
         transition: opacity 0.5s ease, transform 0.5s ease;
         z-index: 1000;
-        overflow: hidden; /* Hide overflow for animation effect */
+        overflow: hidden;
+        color: #e0e0e0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-
+    
     .message-card.show {
         opacity: 1;
         transform: translateY(0);
     }
-
+    
     .message-card ul {
         list-style: none;
         padding: 0;
         margin: 0;
     }
-
+    
     .message-card li {
         padding: 10px;
         margin-bottom: 5px;
         border-radius: 5px;
         text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-
+    
+    .message-card li:last-child {
+        border-bottom: none;
+    }
+    
     .message-card .success {
-        background-color: rgba(76, 175, 80, 0.8);
-        color: white;
+        background-color: rgba(100,  221, 23, 0.8); /* Adjusted green */
+        color: #e0e0e0; /* Changed to #e0e0e0 */
     }
-
+    
     .message-card .error {
-        background-color: rgba(244, 67, 54, 0.8);
-        color: white;
+        background-color: rgba(239, 83, 80, 0.8);
+        color: #e0e0e0;
     }
-
+    
     .message-card .warning {
-        background-color: rgba(255, 152, 0, 0.8);
-        color: white;
+        background-color: rgba(255, 202, 40, 0.8);
+        color: #e0e0e0;
     }
-
+    
     .message-card .info {
-        background-color: rgba(33, 150, 243, 0.8);
-        color: white;
+        background-color: rgba(100, 181, 246, 0.8);
+        color: #e0e0e0;
     }
     
     /* Animation for card appearance */
-    @keyframes slideUp {
+    @keyframes slideDown {
         from {
-            transform: translateY(20px);
+            transform: translateY(-20px);
             opacity: 0;
         }
         to {
             transform: translateY(0);
             opacity: 1;
+        }
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+        .message-card {
+            width: 95%;
+            top: 30px; /* Adjusted top margin for smaller screens */
+            right: 10px;
+            padding: 15px;
+        }
+    }
+    
+    @media (max-width: 320px) {
+        .message-card {
+            width: 98%;
+            font-size: 0.9rem;
+            padding: 10px;
         }
     }
     .footer {

@@ -227,6 +227,200 @@
                 font-size: 0.9rem; /* Smaller description on mobile */
             }
         }
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-brand {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-brand .logo {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-brand p {
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h3,
+        .footer-contact h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-links h3::after,
+        .footer-contact h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--gradient);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+        
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        
+        .footer-contact i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-bottom p {
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+        
+        .legal-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .legal-links a {
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+        
+        .legal-links a:hover {
+            opacity: 1;
+            color: var(--secondary);
+        }
+        
+        /* ===== Responsive Design ===== */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                transform: translateY(-150%);
+                transition: var(--transition);
+            }
+        
+            .nav-links.active {
+                transform: translateY(0);
+            }
+        
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+        
+            .feature-card {
+                width: 100%;
+            }
+        
+            .testimonial-card {
+                padding: 2rem;
+            }
+        
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        
+            .chatbot-window {
+                width: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+        
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        
+            .footer-container {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
@@ -237,7 +431,7 @@
             <ul class="nav-links">
                 <li><a href="{% url 'home-page' %}">Home</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
-                <li><a href="{% url 'post-create' %}"> Write your Thoughts</a></li>
+                <li><a href="{% url 'post-create' %}"> Express thoughts</a></li>
                 {% if request.user.is_superuser %}
                 <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
                 {% endif %}
@@ -273,6 +467,43 @@
         <p>You haven't uploaded any essays yet.</p>
         {% endif %}
     </div>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo">Scereno</div>
+                <p>Your academic sidekick for stress-free success</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                <li><a href="{% url 'register' %}">Register</a></li>
+                <li><a href="{% url 'post-create' %}">Add your thoughts</a></li>
+                <li><a href="{% url 'about' %}">About Us</a></li>
+                <li><a href="mailto:scereno214@gmail.com">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-envelope"></i> scereno214@gmail.com</p>
+                <p><i class="fas fa-phone"></i>+91-8468960963</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Edu Street, Tech City, Pune</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Scereno. All rights reserved.</p>
+            <div class="legal-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookies</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
 {% endblock content %}
