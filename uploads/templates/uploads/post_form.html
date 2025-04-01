@@ -266,6 +266,7 @@
     <nav class="navbar">
         <div class="logo">Scereno</div>
         <ul class="nav-links">
+            <li><a href="{% url 'home-page' %}">Home</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
             {% if request.user.is_superuser %}
             <li><a href="{% url 'dashboard' %}">Dashboard</a></li>

@@ -91,11 +91,12 @@
         <nav class="navbar">
             <div class="logo">Scereno</div>
             <ul class="nav-links">
+                <li><a href="{% url 'home-page' %}">Home</a></li>
+
                 <li><a href="{% url 'about' %}">About</a></li>
                 {% if request.user.is_superuser %}
                 <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
                 {% endif %}
-                <li><a href="{% url 'home-page' %}">Home</a></li>
             </ul>
         </nav>
     </header>
@@ -132,7 +133,7 @@
                 </div>
 
                 <div id="btns" class="flex justify-around mt-10">
-                    <a href="{% url 'post-create' %}" class="bg-blue-500 hover:bg-blue-400 text-white font-semibold rounded-full px-6 py-3 transition-all shadow-xl transform hover:scale-105">Upload</a>
+                    <a href="{% url 'post-create' %}" class="bg-blue-500 hover:bg-blue-400 text-white font-semibold rounded-full px-6 py-3 transition-all shadow-xl transform hover:scale-105">New Essay</a>
                     <a href="{% url 'list-page' %}" class="bg-blue-500 hover:bg-blue-400 text-white font-semibold rounded-full px-6 py-3 transition-all shadow-xl transform hover:scale-105">View All Posts</a>
                 </div>
             </div>
