@@ -1,8 +1,10 @@
 {% extends "uploads/base.html" %}
 {% block content %}
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
     <style>
         /* Navbar Styling */
         .navbar {
@@ -21,7 +23,7 @@
             transform: translateX(-50%);
             z-index: 1000;
         }
-        
+
         .logo {
             font-size: 1.8em;
             font-weight: bold;
@@ -30,17 +32,17 @@
             letter-spacing: 1px;
             cursor: pointer;
         }
-        
+
         .nav-links {
             list-style: none;
             display: flex;
             gap: 35px;
         }
-        
+
         .nav-links li {
             position: relative;
         }
-        
+
         .nav-links a {
             font-size: 1.1em;
             color: #e0e0e0;
@@ -49,13 +51,13 @@
             letter-spacing: 0.5px;
             transition: color 0.3s ease-in-out;
         }
-        
+
         /* Glowing Hover Effect */
         .nav-links a:hover {
             color: #e81cff;
             text-shadow: 0 0 10px #e81cff;
         }
-        
+
         /* Active Link Indicator */
         .nav-links li::after {
             content: '';
@@ -68,31 +70,38 @@
             transition: all 0.3s ease-in-out;
             transform: translateX(-50%);
         }
-        
+
         .nav-links li:hover::after {
             width: 100%;
         }
-        
+
         /* Responsive Navbar */
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
                 padding: 10px 15px;
             }
-        
+
             .nav-links {
                 flex-direction: column;
                 gap: 10px;
                 padding-top: 8px;
             }
         }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
     </style>
+
     <header>
         <nav class="navbar">
             <div class="logo">Scereno</div>
             <ul class="nav-links">
                 <li><a href="{% url 'home-page' %}">Home</a></li>
-
                 <li><a href="{% url 'about' %}">About</a></li>
                 {% if request.user.is_superuser %}
                 <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
@@ -100,12 +109,14 @@
             </ul>
         </nav>
     </header>
+
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Profile Page</title>
         <link rel="stylesheet" href="{% static 'uploads/css/output.css' %}" />
     </head>
+
     <body class="bg-black flex justify-center items-center min-h-screen">
         <div id="total" class="p-10 w-full max-w-md">
             <div id="card" class="bg-gradient-to-br from-[#0a0f1f] to-[#1e3a8a] p-8 rounded-3xl shadow-2xl text-white text-center border border-blue-500">
@@ -115,6 +126,17 @@
                 <div id="content" class="mt-6">
                     <h2 class="text-2xl font-extrabold tracking-wide">{{ request.user.username }}</h2>
                     <h3 class="text-blue-300 text-lg font-light"> {{ request.user.email }}</h3>
+                </div>
+
+                <!-- Errors for Passwords (if any) -->
+                <div id="password-errors" class="mt-4">
+                    {% if form.password.errors %}
+                        <div class="error">
+                            {% for error in form.password.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
 
                 <div id="info" class="flex justify-around mt-8 text-lg">
@@ -140,4 +162,5 @@
         </div>
     </body>
 </html>
+
 {% endblock content %}

@@ -96,8 +96,74 @@
             font-size: 2rem;
         }
     }
+    .message-card {
+        background: rgba(30, 30, 30, 0.9); /* Darker background with transparency */
+        color: #e0e0e0; /* Lighter text for dark theme */
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Darker shadow */
+        margin: 1rem auto; /* Center the card and add margin */
+        max-width: 500px; /* Adjust max-width as needed */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+    
+      .message-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+    
+      .message-card li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle divider */
+      }
+    
+      .message-card li:last-child {
+        border-bottom: none;
+      }
+    
+      .success {
+        color: #66bb6a; /* Green for success messages */
+      }
+    
+      .error {
+        color: #ef5350; /* Red for error messages */
+      }
+    
+      .warning {
+        color: #ffca28; /* Yellow for warning messages */
+      }
+    
+      .info {
+        color: #64b5f6; /* Blue for info messages */
+      }
+    
+      /* Add animation for showing the message card */
+      .message-card.show {
+        animation: fadeIn 0.3s ease-in-out;
+      }
+    
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 </style>
+{% if messages %}
 
+<div class="message-card show">
+    <ul>
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
 <div class="register-container">
     <div class="register-header">
         <h1>Create Account</h1>
@@ -130,14 +196,5 @@
     </div>
 </div>
 
-{% if messages %}
-<div class="message-card show">
-    <ul>
-        {% for message in messages %}
-        <li class="{{ message.tags }}">{{ message }}</li>
-        {% endfor %}
-    </ul>
-</div>
-{% endif %}
 
 {% endblock content %}
