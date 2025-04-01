@@ -85,5 +85,4 @@ def superuser_dashboard(request):
         'total_negative': total_negative,
         'total_neutral': total_neutral,
     }
-
     return render(request, 'uploads/dashboard.html', context)
