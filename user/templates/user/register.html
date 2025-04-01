@@ -1,5 +1,7 @@
 {% extends "uploads/base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
+
 {% block content %}
 
 <style>
@@ -27,32 +29,6 @@
         color: #00FFFF;
         font-size: 2.5rem;
         margin-bottom: 1rem;
-    }
-
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-        display: block;
-        margin-bottom: 0.5rem;
-        color: #00FFFF;
-        font-size: 1.1rem;
-    }
-
-    .form-group input {
-        width: 100%;
-        padding: 0.8rem;
-        border: none;
-        border-radius: 5px;
-        background: #202124;
-        color: #e0e0e0;
-        font-size: 1rem;
-    }
-
-    .form-group input:focus {
-        outline: 2px solid #00FFFF;
-        box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
     }
 
     .register-btn {
@@ -96,105 +72,110 @@
             font-size: 2rem;
         }
     }
+
     .message-card {
-        background: rgba(30, 30, 30, 0.9); /* Darker background with transparency */
-        color: #e0e0e0; /* Lighter text for dark theme */
+        background: rgba(30, 30, 30, 0.9);
+        color: #e0e0e0;
         padding: 1rem;
         border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Darker shadow */
-        margin: 1rem auto; /* Center the card and add margin */
-        max-width: 500px; /* Adjust max-width as needed */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        margin: 1rem auto;
+        max-width: 500px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      }
-    
-      .message-card ul {
+    }
+
+    .message-card ul {
         list-style: none;
         padding: 0;
         margin: 0;
-      }
-    
-      .message-card li {
-        padding: 0.5rem 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle divider */
-      }
-    
-      .message-card li:last-child {
-        border-bottom: none;
-      }
-    
-      .success {
-        color: #66bb6a; /* Green for success messages */
-      }
-    
-      .error {
-        color: #ef5350; /* Red for error messages */
-      }
-    
-      .warning {
-        color: #ffca28; /* Yellow for warning messages */
-      }
-    
-      .info {
-        color: #64b5f6; /* Blue for info messages */
-      }
-    
-      /* Add animation for showing the message card */
-      .message-card.show {
-        animation: fadeIn 0.3s ease-in-out;
-      }
-    
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(-10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-</style>
-{% if messages %}
+    }
 
-<div class="message-card show">
-    <ul>
-        {% for message in messages %}
-            <li class="{{ message.tags }}">{{ message }}</li>
-        {% endfor %}
-    </ul>
-</div>
+    .message-card li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .message-card li:last-child {
+        border-bottom: none;
+    }
+
+    .success {
+        color: #66bb6a;
+    }
+
+    .error {
+        color: #ef5350;
+    }
+
+    .warning {
+        color: #ffca28;
+    }
+
+    .info {
+        color: #64b5f6;
+    }
+
+    .message-card.show {
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    /* Input field styling */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        background-color: black;
+        color: white;
+        border: 1px solid #333;
+        padding: 0.8rem;
+        border-radius: 5px;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+        outline: 2px solid #00FFFF;
+        box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+    }
+</style>
+
+{% if messages %}
+    <div class="message-card show">
+        <ul>
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endif %}
+
 <div class="register-container">
     <div class="register-header">
         <h1>Create Account</h1>
         <p>Join Scereno today and elevate your academic journey</p>
     </div>
-    
+
     <form method="POST">
         {% csrf_token %}
-        <div class="form-group">
-            <label for="username">Username</label>
-            {{ form.username }}
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            {{ form.email }}
-        </div>
-        <div class="form-group">
-            <label for="password1">Password</label>
-            {{ form.password1 }}
-        </div>
-        <div class="form-group">
-            <label for="password2">Confirm Password</label>
-            {{ form.password2 }}
-        </div>
+        {{ form|crispy }}
         <button type="submit" class="register-btn">Register</button>
     </form>
-    
+
     <div class="login-link">
         <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
     </div>
 </div>
-
 
 {% endblock content %}

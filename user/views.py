@@ -18,7 +18,7 @@ def registeruser(request):
             return redirect('login')
         else:
             # If the form is invalid, render the same page with form errors
-            messages.success(request,f'🔄 Oops! Something went wrong.Give it another Shot!')    
+            messages.success(request,f'🔄 Oops! Something went wrong. check email and password!')    
             return render(request, 'user/register.html', {'form': form})
     else:
      form=UserRegistrationForm()
