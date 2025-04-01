@@ -8,19 +8,18 @@
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        max-width: 1500px; /* Prevents stretching */
-        margin: 0 auto; /* Centers navbar */
+        max-width: 1500px;
+        margin: 0 auto;
         padding: 15px 20px;
-        background: #000;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
         position: fixed;
         top: 0;
         left: 50%;
-        transform: translateX(-50%); /* Ensures it's centered */
+        transform: translateX(-50%);
         z-index: 1000;
     }
-    
-    
+
     .logo {
         font-size: 1.8em;
         font-weight: bold;
@@ -28,34 +27,38 @@
         text-shadow: 0 0 8px #00FFFF;
         letter-spacing: 1px;
         cursor: pointer;
+        animation: glow 2s infinite alternate;
     }
-    
+
+    @keyframes glow {
+        from { text-shadow: 0 0 8px #00FFFF; }
+        to { text-shadow: 0 0 15px #00FFFF, 0 0 20px #80FFFF; }
+    }
+
     .nav-links {
         list-style: none;
         display: flex;
         gap: 35px;
     }
-    
+
     .nav-links li {
         position: relative;
     }
-    
+
     .nav-links a {
         font-size: 1.1em;
         color: #e0e0e0;
         text-decoration: none;
         font-weight: 500;
         letter-spacing: 0.5px;
-        transition: color 0.3s ease-in-out;
+        transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
     }
-    
-    /* Glowing Hover Effect */
+
     .nav-links a:hover {
         color: #e81cff;
         text-shadow: 0 0 10px #e81cff;
     }
-    
-    /* Active Link Indicator */
+
     .nav-links li::after {
         content: '';
         position: absolute;
@@ -67,29 +70,29 @@
         transition: all 0.3s ease-in-out;
         transform: translateX(-50%);
     }
-    
+
     .nav-links li:hover::after {
         width: 100%;
     }
-    
-    /* Responsive Navbar */
+
     @media (max-width: 768px) {
         .navbar {
             flex-direction: column;
-            padding: 10px 15px; /* Reduce padding */
+            padding: 10px 15px;
         }
-    
+
         .nav-links {
             flex-direction: column;
             gap: 10px;
             padding-top: 8px;
         }
     }
-    
+
     body {
         background: linear-gradient(to bottom, #1a1a1a, #222);
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         min-height: 100vh;
@@ -113,6 +116,8 @@
         background-size: 200% 100%;
         animation: gradient 5s ease infinite;
         max-width: 90%;
+        margin-top: 20px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
     }
 
     @keyframes gradient {
@@ -163,6 +168,7 @@
         background-color: transparent;
         border: 1px solid #34495e;
         box-sizing: border-box;
+        transition: border-color 0.3s ease-in-out;
     }
 
     .form-container .form-group textarea {
@@ -189,7 +195,7 @@
         font-family: inherit;
         color: #1f293a;
         font-weight: 600;
-        width: 40%;
+        width: 60%;
         background: #00FFFF;
         border: 1px solid #00FFFF;
         padding: 12px 16px;
@@ -198,6 +204,7 @@
         margin-top: 8px;
         cursor: pointer;
         border-radius: 6px;
+        transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out;
     }
 
     .form-container .form-submit-btn:hover {
@@ -205,7 +212,56 @@
         border-color: #fff;
         color: #1f293a;
     }
+
+    .form-title {
+        text-align: center;
+        color: #00FFFF;
+        font-size: 2em;
+        margin-bottom: 10px;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .form-description {
+        text-align: center;
+        color: #bbb;
+        margin-bottom: 20px;
+        animation: fadeIn 1s ease-in-out 0.3s forwards;
+        opacity: 0;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Mobile View Adjustments */
+    @media (max-width: 600px) {
+        .form-container {
+            width: 90%; /* Make form wider on smaller screens */
+            padding: 24px 16px; /* Adjust padding for smaller screens */
+        }
+
+        .form-title {
+            font-size: 1.8em; /* Smaller title on mobile */
+        }
+
+        .form-description {
+            font-size: 0.9em; /* Smaller description on mobile */
+        }
+
+        .form-container .form-group input,
+        .form-container .form-group textarea {
+            width: calc(100% - 24px); /* Adjust input width for smaller screens */
+            padding: 10px 12px; /* Adjust padding for smaller screens */
+        }
+
+        .form-container .form-submit-btn {
+            width: 80%; /* Make button wider on smaller screens */
+            padding: 10px 12px; /* Adjust padding for smaller screens */
+        }
+    }
 </style>
+
 <header>
     <nav class="navbar">
         <div class="logo">Scereno</div>
@@ -213,24 +269,25 @@
             <li><a href="{% url 'about' %}">About</a></li>
             {% if request.user.is_superuser %}
             <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-            {%endif%}
-            <!-- <li><a href="#">Team</a></li> -->
+            {% endif %}
             <li><a href="{% url 'profile' %}">Profile</a></li>
         </ul>
     </nav>
 </header>
+<h2 class="form-title">Got Something to Say? Upload It Here!</h2>
+<p class="form-description">Your journey, your words, your way! Fill in the details, upload your thoughts and get results to feel better.</p>
 <div class="form-container">
     <form class="form" method="POST">
         {% csrf_token %}
         <div class="form-group">
-            <label for="title">Title</label>
+            <label for="title">What's It About?</label>
             <input type="text" name="title" id="title" required>
         </div>
         <div class="form-group">
-            <label for="content">Content</label>
+            <label for="content">Start Writing Here...</label>
             <textarea name="content" id="content" required></textarea>
         </div>
-        <button type="submit" class="form-submit-btn">Upload</button>
+        <button type="submit" class="form-submit-btn">Whisper this to AI!</button>
     </form>
 </div>
 

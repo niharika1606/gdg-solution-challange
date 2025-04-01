@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width:device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List</title>
     <link href="{% static 'css/output.css' %}" rel="stylesheet" />
     <style>
@@ -32,7 +32,7 @@
             transform: translateX(-50%);
             z-index: 1000;
         }
-        
+
         .logo {
             font-size: 1.8em;
             font-weight: bold;
@@ -41,17 +41,17 @@
             letter-spacing: 1px;
             cursor: pointer;
         }
-        
+
         .nav-links {
             list-style: none;
             display: flex;
             gap: 35px;
         }
-        
+
         .nav-links li {
             position: relative;
         }
-        
+
         .nav-links a {
             font-size: 1.1em;
             color: #e0e0e0;
@@ -60,12 +60,12 @@
             letter-spacing: 0.5px;
             transition: color 0.3s ease-in-out;
         }
-        
+
         .nav-links a:hover {
             color: #e81cff;
             text-shadow: 0 0 10px #e81cff;
         }
-        
+
         .nav-links li::after {
             content: '';
             position: absolute;
@@ -77,29 +77,28 @@
             transition: all 0.3s ease-in-out;
             transform: translateX(-50%);
         }
-        
+
         .nav-links li:hover::after {
             width: 100%;
         }
-        
+
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
                 padding: 10px 15px;
             }
-        
+
             .nav-links {
                 flex-direction: column;
                 gap: 10px;
                 padding-top: 8px;
             }
         }
-        
+
         #content {
             padding: 2rem;
             text-align: center;
-            /* Added padding-top to account for the fixed navbar */
-            padding-top: 80px; /* Adjust this value as needed */
+            padding-top: 80px;
         }
 
         #top-cont p:first-child {
@@ -132,9 +131,9 @@
 
         .card:hover {
             box-shadow: rgba(193, 44, 223, 0.19) 0px 10px 20px,
-                        rgba(193, 44, 223, 0.23) 0px 6px 6px,
-                        inset rgba(0, 0, 0, 0.19) 0px 10px 20px,
-                        inset rgba(0, 0, 0, 0.23) 0px 6px 6px;
+                rgba(193, 44, 223, 0.23) 0px 6px 6px,
+                inset rgba(0, 0, 0, 0.19) 0px 10px 20px,
+                inset rgba(0, 0, 0, 0.23) 0px 6px 6px;
             border: 5px solid #e81cff;
         }
 
@@ -202,6 +201,32 @@
             gap: 1.5rem;
             padding: 1.5rem;
         }
+
+        /* Mobile View Adjustments */
+        @media (max-width: 600px) {
+            .card {
+                width: 90%; /* Make cards wider on smaller screens */
+                max-width: 400px; /* Limit width */
+                height: auto; /* Adjust height based on content */
+            }
+
+            #grid-content {
+                grid-template-columns: 1fr; /* Single column layout on mobile */
+            }
+
+            #content {
+                padding: 1rem; /* Adjust padding for smaller screens */
+                padding-top: 70px; /* Adjust top padding */
+            }
+
+            #top-cont p:first-child {
+                font-size: 1.8rem; /* Smaller title on mobile */
+            }
+
+            #top-cont p:last-child {
+                font-size: 0.9rem; /* Smaller description on mobile */
+            }
+        }
     </style>
 </head>
 <body>
@@ -211,44 +236,41 @@
             <div class="logo">Scereno</div>
             <ul class="nav-links">
                 <li><a href="{% url 'home-page' %}">Home</a></li>
-
                 <li><a href="{% url 'about' %}">About</a></li>
                 <li><a href="{% url 'post-create' %}">New Essay</a></li>
-
                 {% if request.user.is_superuser %}
                 <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                {%endif%}
+                {% endif %}
                 <li><a href="{% url 'profile' %}">Profile</a></li>
-                
             </ul>
         </nav>
     </header>
 
     <div id="content">
         <div id="top-cont">
-            <p>Empower Your Academic Journey</p>
-            <p>Discover the secret to academic success: Our comprehensive stress management platform. Unlock personalized strategies, expert support, and a thriving community to help you overcome challenges</p>
+            <p>Your Academic Time Capsule</p>
+            <p>Journey through your past uploads! See how far you've come,relive your victories, analyze your challenges, and chart your path to future triumphs..</p>
         </div>
 
         {% if essays %}
-            <div id="grid-content">
-                {% for essay_item in essays %}
-                    <div class="card">
-                        <p class="card-title">{{ essay_item.title }}</p>
-                        <p class="card-des">
-                            {{ essay_item.content }}
-                        </p>
-                        <p class="card-text">
-                            <span><a href="{% url 'post-detail' essay_item.id %}">View More</a></span>
-                            <svg class="arrow-icon" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
-                            </svg>
-                        </p>
-                    </div>
-                {% endfor %}
+        <div id="grid-content">
+            {% for essay_item in essays %}
+            <div class="card">
+                <p class="card-title">{{ essay_item.title }}</p>
+                <p class="card-des">
+                    {{ essay_item.content }}
+                </p>
+                <p class="card-text">
+                    <span><a href="{% url 'post-detail' essay_item.id %}">View More</a></span>
+                    <svg class="arrow-icon" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
+                    </svg>
+                </p>
             </div>
+            {% endfor %}
+        </div>
         {% else %}
-            <p>You haven't uploaded any essays yet.</p>
+        <p>You haven't uploaded any essays yet.</p>
         {% endif %}
     </div>
 </body>

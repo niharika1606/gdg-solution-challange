@@ -111,7 +111,7 @@
         width: 100%;
         max-width: 1500px;
         margin: 0 auto;
-        padding: 10px 20px; /* Reduced padding */
+        padding: 10px 20px;
         background: #000;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         position: fixed;
@@ -119,7 +119,7 @@
         left: 50%;
         transform: translateX(-50%);
         z-index: 0;
-        height: 100px; /* Reduced height */
+        height: 100px;
     }
 
     #logo {
@@ -177,13 +177,53 @@
         .navbar {
             flex-direction: column;
             padding: 10px 15px;
-            height: auto; /* Allow height to adjust */
+            height: auto;
         }
 
         .nav-links {
             flex-direction: column;
             gap: 10px;
             padding-top: 8px;
+        }
+    }
+
+    /* Mobile View Adjustments */
+    @media (max-width: 600px) {
+        .hero {
+            padding: 4rem 1rem; /* Adjust padding for smaller screens */
+        }
+
+        .hero h1 {
+            font-size: 2.5rem; /* Smaller title on mobile */
+        }
+
+        .hero p {
+            font-size: 1rem; /* Smaller paragraph text on mobile */
+        }
+
+        .hero button {
+            font-size: 1.2rem; /* Smaller button font size on mobile */
+            padding: 0.8rem 1.5rem; /* Smaller button padding on mobile */
+        }
+
+        .features h2 {
+            font-size: 2rem; /* Smaller features title on mobile */
+        }
+
+        .feature {
+            padding: 1.5rem; /* Smaller feature padding on mobile */
+        }
+
+        .feature h3 {
+            font-size: 1.3rem; /* Smaller feature heading on mobile */
+        }
+
+        .feature p {
+            font-size: 0.9rem; /* Smaller feature paragraph text on mobile */
+        }
+
+        .cta h2 {
+            font-size: 2rem; /* Smaller CTA title on mobile */
         }
     }
 </style>
@@ -202,9 +242,9 @@
         </ul>
     </nav>
 </header>
-<div class="hero" style="padding-top: 160px;"> 
-    <h1>Unlock Your Academic Potential</h1>
-    <p>Empower your essays with AI-driven analysis and manage academic stress with our personalized tools. Join a community dedicated to your success.</p>
+<div class="hero" style="padding-top: 160px;">
+    <h1>Welcome to Scereno</h1>
+    <p>where AI meets academic success! We use cutting-edge technology to analyze your assignments, track your progress, and offer insights to help you improve.</p>
 
     <div class="button-container">
         {% if user.is_authenticated %}
@@ -217,25 +257,25 @@
 </div>
 
 <div class="features">
-    <h2>Key Features</h2>
+    <h2>What's In It For You?</h2>
     <div class="feature-grid">
         <div class="feature">
-            <h3>AI Essay Analysis</h3>
-            <p>Receive detailed feedback on your writing, including grammar, style, and structure.</p>
+            <h3>Essay Intel: Zero Guesswork</h3>
+            <p>No more guesswork—just smart, stress-free learning.<br></p>
         </div>
         <div class="feature">
-            <h3>Stress Management Tools</h3>
-            <p>Access personalized strategies and resources to help you manage academic stress effectively.</p>
+            <h3>Panic to Power Surge </h3>
+            <p>Turn your late-night study panic into a power move. We’re all about helping you study smarter, not harder (and maybe even enjoy it a little).</p>
         </div>
         <div class="feature">
-            <h3>Community Support</h3>
-            <p>Connect with peers, share experiences, and find encouragement in a supportive community.</p>
+            <h3>Exam Stress: Nullified</h3>
+            <p>Stressed about exams? Feeling like your notes are written in a secret alien language? Don’t worry, Scereno’s got you!</p>
         </div>
     </div>
 </div>
 
 <div class="cta">
-    <h2>Ready to Transform Your Academic Journey?</h2>
+    <h2> Join us in redefining education, because your future starts now!</h2>
 </div>
 
 {% endblock content %}

@@ -1,193 +1,227 @@
 {% extends "uploads\base.html" %}
-{%load crispy_forms_tags%}
-{%block content%} 
+{% load crispy_forms_tags %}
+{% block content %}
     <!DOCTYPE html>
-<html lang="en">
-  <style>
-    /* Background setup */
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background: radial-gradient(circle, #1a1a1a, #111);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #e0e0e0;
-}
+    <html lang="en">
+    <style>
+        /* Background setup */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: radial-gradient(circle, #1a1a1a, #111);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e0e0e0;
+        }
 
-/* Register Box */
-.register-container {
-    background: linear-gradient(135deg, #222, #333);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-    text-align: center;
-    width: 100%;
-    max-width: 400px;
-    animation: fadeIn 1s ease-in-out;
-    position: relative;
-    overflow: hidden;
-}
+        /* Register Box */
+        .register-container {
+            background: linear-gradient(135deg, #222, #333);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            animation: fadeIn 1s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
 
-/* Glowing Effect */
-.register-container::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
-    animation: rotateGlow 6s infinite linear;
-    z-index: 0;
-}
+        /* Glowing Effect */
+        .register-container::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
+            animation: rotateGlow 6s infinite linear;
+            z-index: 0;
+        }
 
-/* Title */
-.register-title {
-    font-size: 2.2em;
-    color: #00FFFF;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    position: relative;
-    z-index: 1;
-}
+        /* Title */
+        .register-title {
+            font-size: 2.2em;
+            color: #00FFFF;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
 
-/* Input Fields */
-.input-box {
-    position: relative;
-    margin-bottom: 20px;
-}
+        /* Input Fields */
+        .input-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
 
-.input-box input {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    background-color: #1a1a1a;
-    color: #fff;
-    font-size: 1em;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    outline: none;
-}
+        .input-box input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1a1a1a;
+            color: #fff;
+            font-size: 1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+        }
 
-.input-box input:focus {
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-}
+        .input-box input:focus {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
 
-/* Glowing Line Effect */
-.input-box span {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #00FFFF, #8A2BE2);
-    transition: 0.4s;
-}
+        /* Glowing Line Effect */
+        .input-box span {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00FFFF, #8A2BE2);
+            transition: 0.4s;
+        }
 
-.input-box input:focus ~ span {
-    width: 100%;
-    left: 0;
-}
+        .input-box input:focus ~ span {
+            width: 100%;
+            left: 0;
+        }
 
-/* Register Button */
-.btn-register {
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(45deg, #e81cff, #40c9ff);
-    border: none;
-    color: white;
-    font-size: 1.2em;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
+        /* Register Button */
+        .btn-register {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #e81cff, #40c9ff);
+            border: none;
+            color: white;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-.btn-register::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
-    transform: scale(0);
-    transition: transform 0.4s;
-}
+        .btn-register::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+            transform: scale(0);
+            transition: transform 0.4s;
+        }
 
-.btn-register:hover::before {
-    transform: scale(1);
-}
+        .btn-register:hover::before {
+            transform: scale(1);
+        }
 
-.btn-register:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
-}
+        .btn-register:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+        }
 
-/* Login Link */
-.login-link {
-    margin-top: 15px;
-    font-size: 0.9em;
-    position: relative;
-    z-index: 1;
-    color: #ffffff;
-}
+        /* Login Link */
+        .login-link {
+            margin-top: 15px;
+            font-size: 0.9em;
+            position: relative;
+            z-index: 1;
+            color: #ffffff;
+        }
 
-.login-link a {
-    color: #00FFFF;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
+        .login-link a {
+            color: #00FFFF;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
 
-.login-link a:hover {
-    color: #2879e4;
-}
+        .login-link a:hover {
+            color: #2879e4;
+        }
 
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
 
-@keyframes rotateGlow {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-</style>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Career Guidance</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="register-container">
-        <h2 class="register-title">Create an Account</h2>
-        <form class="register-form" id="registerForm">
-          {% csrf_token %}
-          <div class="input-box">
-            {{ form.username|as_crispy_field }}
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rotateGlow {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Mobile View Adjustments */
+        @media (max-width: 600px) {
+            .register-container {
+                padding: 30px;
+            }
+
+            .register-title {
+                font-size: 1.8em;
+            }
+
+            .input-box input {
+                padding: 10px;
+            }
+
+            .btn-register {
+                padding: 10px;
+                font-size: 1em;
+            }
+
+            .login-link {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Register - Career Guidance</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="register-container">
+            <h2 class="register-title">Create an Account</h2>
+            <form class="register-form" id="registerForm">
+                {% csrf_token %}
+                <div class="input-box">
+                    {{ form.username|as_crispy_field }}
+                </div>
+                <div class="input-box">
+                    {{ form.email|as_crispy_field }}
+                </div>
+                <div class="input-box">
+                    {{ form.password1|as_crispy_field }}
+                </div>
+                <div class="input-box">
+                    {{ form.password2|as_crispy_field }}
+                </div>
+                <button type="submit" class="btn btn-register" id="registerBtn">Register</button>
+                <p class="login-link">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+            </form>
         </div>
-        <div class="input-box">
-            {{ form.email|as_crispy_field }}
-        </div>
-        <div class="input-box">
-            {{ form.password1|as_crispy_field }}
-        </div>
-        <div class="input-box">
-            {{ form.password2|as_crispy_field }}
-        </div>
-            <button type="submit" class="btn btn-register" id="registerBtn">Register</button>
-            <p class="login-link">Already have an account? <a href="{% url 'login' %}">Login</a></p>
-        </form>
-    </div>
-
-    <script src="register.js"></script>
-</body>
-</html>
-
-{% endblock content%}
+        <script src="register.js"></script>
+    </body>
+    </html>
+{% endblock content %}

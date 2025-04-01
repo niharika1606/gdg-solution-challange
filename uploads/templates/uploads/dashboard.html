@@ -3,14 +3,13 @@
         <div class="logo">Scereno</div>
         <ul class="nav-links">
             <li><a href="{% url 'home-page' %}">Home</a></li>
-            <li><a href="{% url 'dashboard' %}">About</a></li>
-            <!-- <li><a href="#">Team</a></li> -->
+            <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'profile' %}">Profile</a></li>
-           
         </ul>
     </nav>
 </header>
-<h2 class="dashboard-title">Dashboard</h2>
+<h2 class="dashboard-title">Emotion-O-Meter!</h2>
+<p>See how your students are really feeling! Get the lowdown on positive, negative, and 'meh' vibes in their work. Help them shine!</p>
 
 <div class="table-container">
     <table class="custom-table">
@@ -28,7 +27,6 @@
                 <td>{{ profile.user.username }}</td>
                 <td class="positive-cell">{{ profile.positive }}</td>
                 <td class="positive-cell">{{ profile.neutral }}</td>
-
                 <td class="negative-cell">{{ profile.negative }}</td>
             </tr>
             {% endfor %}
@@ -36,26 +34,24 @@
     </table>
 </div>
 
-<!-- Animation and Styling -->
 <style>
     .navbar {
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        max-width: 1500px; /* Prevents stretching */
-        margin: 0 auto; /* Centers navbar */
+        max-width: 1500px;
+        margin: 0 auto;
         padding: 15px 20px;
         background: #000;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         position: fixed;
         top: 0;
         left: 50%;
-        transform: translateX(-50%); /* Ensures it's centered */
+        transform: translateX(-50%);
         z-index: 1000;
     }
-    
-    
+
     .logo {
         font-size: 1.8em;
         font-weight: bold;
@@ -64,17 +60,17 @@
         letter-spacing: 1px;
         cursor: pointer;
     }
-    
+
     .nav-links {
         list-style: none;
         display: flex;
         gap: 35px;
     }
-    
+
     .nav-links li {
         position: relative;
     }
-    
+
     .nav-links a {
         font-size: 1.1em;
         color: #e0e0e0;
@@ -83,14 +79,12 @@
         letter-spacing: 0.5px;
         transition: color 0.3s ease-in-out;
     }
-    
-    /* Glowing Hover Effect */
+
     .nav-links a:hover {
         color: #e81cff;
         text-shadow: 0 0 10px #e81cff;
     }
-    
-    /* Active Link Indicator */
+
     .nav-links li::after {
         content: '';
         position: absolute;
@@ -102,26 +96,24 @@
         transition: all 0.3s ease-in-out;
         transform: translateX(-50%);
     }
-    
+
     .nav-links li:hover::after {
         width: 100%;
     }
-    
-    /* Responsive Navbar */
+
     @media (max-width: 768px) {
         .navbar {
             flex-direction: column;
-            padding: 10px 15px; /* Reduce padding */
+            padding: 10px 15px;
         }
-    
+
         .nav-links {
             flex-direction: column;
             gap: 10px;
             padding-top: 8px;
         }
     }
-    
-    /* Background Theme */
+
     body {
         background: linear-gradient(to bottom, #1a1a1a, #222);
         color: #e0e0e0;
@@ -135,7 +127,6 @@
         justify-content: center;
     }
 
-    /* Dashboard Title */
     .dashboard-title {
         font-size: 2.5rem;
         color: #00FFFF;
@@ -145,7 +136,6 @@
         letter-spacing: 1.5px;
     }
 
-    /* Table Container */
     .table-container {
         width: 90%;
         max-width: 1100px;
@@ -157,7 +147,6 @@
         animation: slideIn 1.5s ease-in-out;
     }
 
-    /* Table Styling */
     .custom-table {
         width: 100%;
         border-collapse: collapse;
@@ -193,7 +182,6 @@
         cursor: pointer;
     }
 
-    /* Score Styling */
     .positive-cell {
         color: #09d300;
         font-weight: bold;
@@ -206,7 +194,6 @@
         transition: 0.3s;
     }
 
-    /* Alternating Row Colors */
     tbody tr:nth-child(even) {
         background: #2c3e50;
     }
@@ -215,7 +202,6 @@
         background: #1f293a;
     }
 
-    /* Hover Effects */
     .positive-cell:hover {
         background: #09d300;
         color: #fff;
@@ -228,12 +214,12 @@
         transform: scale(1.1);
     }
 
-    /* Animations */
     @keyframes fadeIn {
         0% {
             opacity: 0;
             transform: translateY(-30px);
         }
+
         100% {
             opacity: 1;
             transform: translateY(0);
@@ -245,6 +231,7 @@
             opacity: 0;
             transform: translateX(-100px);
         }
+
         100% {
             opacity: 1;
             transform: translateX(0);
@@ -253,7 +240,8 @@
 
     /* Mobile Responsive */
     @media (max-width: 768px) {
-        .custom-table th, .custom-table td {
+        .custom-table th,
+        .custom-table td {
             padding: 12px 10px;
             font-size: 1rem;
         }
@@ -263,4 +251,18 @@
         }
     }
 
+    /* Additional Mobile Adjustments */
+    @media (max-width: 600px) {
+        .custom-table {
+            font-size: 0.9rem; /* Smaller font on very small screens */
+        }
+
+        th, td {
+            padding: 10px 8px; /* Smaller padding on very small screens */
+        }
+
+        .table-container{
+            width: 95%; /* Make table container wider on mobile */
+        }
+    }
 </style>

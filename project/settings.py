@@ -178,4 +178,4 @@ EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT = 587  
 EMAIL_USE_TLS = True  # Or EMAIL_USE_SSL for port 465
 EMAIL_HOST_USER = 'mangalpalliniharika@gmail.com'  # Your email address
-EMAIL_HOST_PASSWORD = 'cxfk cpxz dnrl wttd' 
+EMAIL_HOST_PASSWORD = os.getenv('HOST_PASSWORD')

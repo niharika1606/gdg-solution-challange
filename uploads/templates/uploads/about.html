@@ -12,18 +12,17 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: 1500px; /* Prevents stretching */
-    margin: 0 auto; /* Centers navbar */
+    max-width: 1500px;
+    margin: 0 auto;
     padding: 15px 20px;
     background: #000;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     position: fixed;
     top: 0;
     left: 50%;
-    transform: translateX(-50%); /* Ensures it's centered */
+    transform: translateX(-50%);
     z-index: 1000;
 }
-
 
 .logo {
     font-size: 1.8em;
@@ -53,13 +52,11 @@
     transition: color 0.3s ease-in-out;
 }
 
-/* Glowing Hover Effect */
 .nav-links a:hover {
     color: #e81cff;
     text-shadow: 0 0 10px #e81cff;
 }
 
-/* Active Link Indicator */
 .nav-links li::after {
     content: '';
     position: absolute;
@@ -80,7 +77,7 @@
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
-        padding: 10px 15px; /* Reduce padding */
+        padding: 10px 15px;
     }
 
     .nav-links {
@@ -90,31 +87,30 @@
     }
 }
 
-
-
+/* Container Styles - Updated for single row */
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: nowrap; /* Changed from wrap to nowrap */
-    gap: 60px; 
+    flex-wrap: nowrap;
+    gap: 60px;
     padding: 20px;
-    max-width: 1000px; /* Added max-width */
-    margin: 0 auto; /* Center the container */
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 /* Responsive adjustments */
 @media (max-width: 1000px) {
     .container {
-        flex-wrap: wrap; /* Wrap on smaller screens */
+        flex-wrap: wrap;
     }
+
     .card {
         width: 160px;
         height: 224px;
     }
 }
 
-/* Rest of your CSS remains exactly the same */
 body {
     display: flex;
     flex-direction: column;
@@ -125,9 +121,7 @@ body {
     background: linear-gradient(to bottom, #1a1a1a, #222);
     color: #e0e0e0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* padding: 40px 20px; */
-    overflow-x:hidden;
-    
+    overflow-x: hidden;
 }
 
 .title-container {
@@ -189,7 +183,7 @@ body {
     color: white;
     text-align: center;
     margin: 0 auto;
-    flex-shrink: 0; /* Prevents cards from shrinking */
+    flex-shrink: 0;
 }
 
 .card::before {
@@ -264,6 +258,55 @@ body {
     font-size: 1rem;
     color: #9ca3af;
 }
+
+/* Mobile View Adjustments */
+@media (max-width: 600px) {
+    .title-container {
+        padding: 40px 20px;
+        margin-bottom: 30px;
+    }
+
+    .title {
+        font-size: 2em;
+    }
+
+    .about-text {
+        font-size: 1em;
+        padding: 20px;
+        margin-bottom: 40px;
+    }
+
+    .team-title {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+
+    .container {
+        gap: 30px;
+    }
+
+    .card {
+        width: 140px;
+        height: 200px;
+        padding: 10px;
+    }
+
+    .card .heading {
+        font-size: 18px;
+    }
+
+    .card p {
+        font-size: 12px;
+    }
+
+    .footer {
+        padding: 1.5rem;
+    }
+
+    .footerText {
+        font-size: 0.9rem;
+    }
+}
 </style>
 </head>
 <body>
@@ -287,8 +330,8 @@ body {
     </div>
 
     <div class="about-text">
-        <p>Scereno is your academic sidekick, built to zap stress and boost your study vibes! We're here to make learning less "ugh" and more "aha!"</p>
-        <p>Our squad? A bunch of folks who believe in brains and chill. We're on a mission to make your student life awesome, one stress-free study session at a time.</p>
+        <p>Education should empower, not exhaust</p>
+        <p>Your success is more than just grades—it’s growth, well-being, and confidence. And we’re here to make that happen!</p>
     </div>
 
     <h2 class="team-title">Meet the Team</h2>

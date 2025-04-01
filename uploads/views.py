@@ -9,16 +9,13 @@ from gemini.views import GenerateResponse
 from user.models import Profile
 from django.views import View
 from django.contrib.auth.decorators import user_passes_test
-
+from django.contrib import messages
 class PostListView(LoginRequiredMixin,ListView):
     model = essay  
     template_name = 'uploads/essay_list.html'  
     context_object_name = 'essays'  
     ordering = ['-created_at']  
     def get_queryset(self):
-        if self.request.user.is_superuser:
-            return essay.objects.all()
-        else:
             return essay.objects.filter(student=self.request.user)
 
 class PostDetailView(DetailView):
@@ -49,7 +46,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
             form.instance.results = result  # Save ML result in the essay
             form.instance.save()
 
-            messages.success(self.request, "Post created successfully with ML results!")
+            messages.success(self.request, "Done! Your words are out there. Keep up the great work!")
 
         except Exception as e:
             form.instance.results = f"Error: {str(e)}"

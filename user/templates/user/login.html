@@ -117,20 +117,21 @@
 
         input[value]:not([value=""]) ~ label,
         input:focus ~ label {
-            
             top: -10px;
             font-size: 0.8em;
             background: #1f293a;
             padding: 0 6px;
             color: #00FFFF;
         }
-        .input-box input:not(:placeholder-shown)~label{
-            top:-10px;
+        
+        .input-box input:not(:placeholder-shown) ~ label {
+            top: -10px;
             font-size: 0.8em;
             background: #1f293a;
             padding: 0 6px;
             color: #00FFFF;
         }
+
         label {
             position: absolute;
             top: 50%;
@@ -209,6 +210,19 @@
             font-size: 1rem;
             color: #9ca3af;
         }
+        
+        /* Mobile View Adjustments */
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+                height: auto;
+                border-radius: 20px;
+            }
+            
+            .login-box {
+                width: 90%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -231,7 +245,7 @@
                 </div>
                 <button class="btn" type="submit">Login</button>
                 <div class="signup-link">
-                    <a href="#">Sign Up</a>
+                    <a href="{% url 'register' %}">Sign Up</a>
                 </div>
             </form>
         </div>
