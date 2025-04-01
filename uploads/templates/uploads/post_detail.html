@@ -197,10 +197,12 @@
         <div class="media-body">
             <div class="article-metadata">
                 <a href="#">{{ object.student }}</a>
-                <small>{{ object.content }}</small>
+                
             </div>
             <h2 class="article-title">{{ object.title }}</h2>
             <p class="article-content">{{ object.created_at|date:'F d, Y' }}</p>
+            <br>
+            <small>{{ object.content }}</small>
             <hr>
             <p>{{ object.results }}</p>
         </div>
