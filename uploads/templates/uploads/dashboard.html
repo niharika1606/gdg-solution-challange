@@ -1,284 +1,128 @@
-<header>
-  <nav class="navbar">
-    <div class="logo">Scereno</div>
-    <ul class="nav-links">
-      <li><a href="{% url 'home-page' %}">Home</a></li>
-      <li><a href="{% url 'about' %}">About</a></li>
-      <li><a href="{% url 'profile' %}">Profile</a></li>
-    </ul>
-  </nav>
-</header>
-<h2 class="dashboard-title">Emotion-O-Meter!</h2>
-<p>
-  See how your students are really feeling! Get the lowdown on positive,
-  negative, and 'meh' vibes in their work. Help them shine!
-</p>
+{% extends "uploads/base.html" %}
+{% load static %}
+{% block content %}
 
-<div class="table-container">
-  <table class="custom-table">
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>Positive Score</th>
-        <th>Neutral Score</th>
-        <th>Negative Score</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for profile in profiles %}
-      <tr>
-        <td>{{ profile.user.username }}</td>
-        <td class="positive-cell">{{ profile.positive }}</td>
-        <td class="neutral-cell">{{ profile.neutral }}</td>
-        <td class="negative-cell">{{ profile.negative }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+<div class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-black shadow-lg z-50 h-24 flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="flex justify-between items-center h-full">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-cyan-400 text-xl font-bold tracking-wide">Scereno</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="{% url 'home-page' %}" class="text-gray-300 hover:text-cyan-400 px-3 py-2 text-sm font-medium relative group">
+                        Home
+                        <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 group-hover:w-full group-hover:transition-all duration-300 transform -translate-x-1/2"></span>
+                    </a>
+                    <a href="{% url 'about' %}" class="text-gray-300 hover:text-cyan-400 px-3 py-2 text-sm font-medium relative group">
+                        About
+                        <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 group-hover:w-full group-hover:transition-all duration-300 transform -translate-x-1/2"></span>
+                    </a>
+                    <a href="{% url 'profile' %}" class="text-gray-300 hover:text-cyan-400 px-3 py-2 text-sm font-medium relative group">
+                        Profile
+                        <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 group-hover:w-full group-hover:transition-all duration-300 transform -translate-x-1/2"></span>
+                    </a>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-cyan-400 hover:text-white focus:outline-none">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="md:hidden hidden bg-gray-900 absolute top-24 left-0 right-0">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="{% url 'home-page' %}" class="text-gray-300 hover:bg-gray-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="{% url 'about' %}" class="text-gray-300 hover:bg-gray-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="{% url 'profile' %}" class="text-gray-300 hover:bg-gray-800 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-12 px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-6 text-cyan-400 animate-fade-in-down">Emotion-O-Meter!</h2>
+        <p class="text-lg text-center max-w-3xl mx-auto mb-12 text-gray-300">
+            See how your students are really feeling! Get the lowdown on positive,
+            negative, and 'meh' vibes in their work. Help them shine!
+        </p>
+
+        <div class="max-w-6xl mx-auto bg-gray-800 rounded-xl shadow-2xl overflow-hidden animate-slide-in-left">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-700">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-cyan-400 uppercase tracking-wider">Username</th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-cyan-400 uppercase tracking-wider">Positive Score</th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-cyan-400 uppercase tracking-wider">Neutral Score</th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-cyan-400 uppercase tracking-wider">Negative Score</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-700">
+                        {% for profile in profiles %}
+                        <tr class="hover:bg-gray-700 transition-colors duration-200 transform hover:scale-[1.01]">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100">{{ profile.user.username }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-400 font-bold hover:bg-green-500 hover:text-white transition-all duration-200">{{ profile.positive }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-yellow-400 font-bold hover:bg-yellow-500 hover:text-white transition-all duration-200">{{ profile.neutral }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-red-400 font-bold hover:bg-red-500 hover:text-white transition-all duration-200">{{ profile.negative }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
 </div>
 
+<!-- Mobile Menu Script -->
+<script>
+    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+    });
+</script>
+
+<!-- Custom Animations -->
 <style>
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 15px 20px;
-    background: #000;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-  }
-
-  .logo {
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #00ffff;
-    text-shadow: 0 0 8px #00ffff;
-    letter-spacing: 1px;
-    cursor: pointer;
-  }
-
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 35px;
-  }
-
-  .nav-links li {
-    position: relative;
-  }
-
-  .nav-links a {
-    font-size: 1.1em;
-    color: #e0e0e0;
-    text-decoration: none;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    transition: color 0.3s ease-in-out;
-  }
-
-  .nav-links a:hover {
-    color: #e81cff;
-    text-shadow: 0 0 10px #e81cff;
-  }
-
-  .nav-links li::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: -5px;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #e81cff, #40c9ff);
-    transition: all 0.3s ease-in-out;
-    transform: translateX(-50%);
-  }
-
-  .nav-links li:hover::after {
-    width: 100%;
-  }
-
-  @media (max-width: 768px) {
-    .navbar {
-      flex-direction: column;
-      padding: 10px 15px;
+    @keyframes fade-in-down {
+        0% {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
-
-    .nav-links {
-      flex-direction: column;
-      gap: 10px;
-      padding-top: 8px;
+    
+    @keyframes slide-in-left {
+        0% {
+            opacity: 0;
+            transform: translateX(-100px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
-  }
-
-  body {
-    background: linear-gradient(to bottom, #1a1a1a, #222);
-    color: #e0e0e0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .dashboard-title {
-    font-size: 2.5rem;
-    color: #00ffff;
-    text-align: center;
-    margin-bottom: 30px;
-    animation: fadeIn 1.5s ease-in-out;
-    letter-spacing: 1.5px;
-  }
-
-  .table-container {
-    width: 90%;
-    max-width: 1100px;
-    margin: 0 auto;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
-    border-radius: 12px;
-    background: #1f293a;
-    animation: slideIn 1.5s ease-in-out;
-  }
-
-  .custom-table {
-    width: 100%;
-    border-collapse: collapse;
-    color: #e0e0e0;
-    font-size: 1.2rem;
-  }
-
-  thead {
-    background: #34495e;
-    color: #00ffff;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  th,
-  td {
-    padding: 18px 25px;
-    text-align: center;
-  }
-
-  th {
-    font-weight: bold;
-  }
-
-  tbody tr {
-    transition: all 0.3s ease-in-out;
-  }
-
-  tbody tr:hover {
-    background: #00ffff;
-    color: #fff;
-    transform: scale(1.03);
-    transition: 0.3s ease;
-    cursor: pointer;
-  }
-
-  .positive-cell {
-    color: #09d300;
-    font-weight: bold;
-    transition: 0.3s;
-  }
-  .neutral-cell {
-    color: yellow;
-    font-weight: bold;
-    transition: 0.3s;
-  }
-
-  .negative-cell {
-    color: #e74c3c;
-    font-weight: bold;
-    transition: 0.3s;
-  }
-
-  tbody tr:nth-child(even) {
-    background: #2c3e50;
-  }
-
-  tbody tr:nth-child(odd) {
-    background: #1f293a;
-  }
-
-  .positive-cell:hover {
-    background: #09d300;
-    color: #fff;
-    transform: scale(1.1);
-  }
-  .neutral-cell:hover {
-    background: #ffbb00;
-    color: #fff;
-    transform: scale(1.1);
-  }
-
-  .negative-cell:hover {
-    background: red;
-    color: #fff;
-    text-align: center;
-    transform: scale(1.1);
-  }
-
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-      transform: translateY(-30px);
+    
+    .animate-fade-in-down {
+        animation: fade-in-down 1.5s ease-in-out;
     }
-
-    100% {
-      opacity: 1;
-      transform: translateY(0);
+    
+    .animate-slide-in-left {
+        animation: slide-in-left 1.5s ease-in-out;
     }
-  }
-
-  @keyframes slideIn {
-    0% {
-      opacity: 0;
-      transform: translateX(-100px);
-    }
-
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  /* Mobile Responsive */
-  @media (max-width: 768px) {
-    .custom-table th,
-    .custom-table td {
-      padding: 12px 10px;
-      font-size: 1rem;
-    }
-
-    .dashboard-title {
-      font-size: 2rem;
-    }
-  }
-
-  /* Additional Mobile Adjustments */
-  @media (max-width: 600px) {
-    .custom-table {
-      font-size: 0.9rem; /* Smaller font on very small screens */
-    }
-
-    th,
-    td {
-      padding: 10px 8px; /* Smaller padding on very small screens */
-    }
-
-    .table-container {
-      width: 95%; /* Make table container wider on mobile */
-    }
-  }
 </style>
+
+{% endblock content %}
