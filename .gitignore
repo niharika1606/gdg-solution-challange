@@ -14,3 +14,6 @@ my_venv/
 # Ignore VS Code and system files
 .vscode/
 .DS_Store
+
+
+node_modules
