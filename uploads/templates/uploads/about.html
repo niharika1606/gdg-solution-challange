@@ -58,6 +58,16 @@
         </div>
     </nav>
 
+    {% if messages %}
+    <div class="message-card show">
+        <ul>
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
     <!-- Main Content -->
     <main class="pt-32 pb-12 px-4 sm:px-6 lg:px-8">
         <!-- Hero Section -->

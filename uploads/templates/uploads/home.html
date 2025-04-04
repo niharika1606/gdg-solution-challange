@@ -49,6 +49,16 @@
             </div>
         </div>
     </nav>
+
+    {% if messages %}
+    <div class="message-card show">
+        <ul>
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
     
     <!-- Messages -->
     {% if messages %}
