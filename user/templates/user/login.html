@@ -225,9 +225,77 @@
                 width: 90%;
             }
         }
+        
+    .message-card {
+        background: rgba(30, 30, 30, 0.9);
+        color: #e0e0e0;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        margin: 1rem auto;
+        max-width: 500px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .message-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .message-card li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .message-card li:last-child {
+        border-bottom: none;
+    }
+
+    .success {
+        color: #66bb6a;
+    }
+
+    .error {
+        color: #ef5350;
+    }
+
+    .warning {
+        color: #ffca28;
+    }
+
+    .info {
+        color: #64b5f6;
+    }
+
+    .message-card.show {
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
     </style>
 </head>
 <body>
+    {% if messages %}
+    <div class="message-card show">
+        <ul>
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
     <div class="container">
         <div class="login-box">
             <h2>Login</h2>
